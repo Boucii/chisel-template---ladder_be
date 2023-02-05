@@ -25,6 +25,7 @@ class Reservation_Station extends Module with consts{
      val i_exception = Input(Bool())
      val i_available_funcs = Input(Vec(7, UInt(2.W)))
 
+
    }) 
      //val uops = Reg(Vec(2,new uop()))
      val uops = RegInit(0.U.asTypeOf(Vec(2,new uop())))
@@ -120,9 +121,9 @@ class Reservation_Station extends Module with consts{
 
       val write_num = Wire(UInt(2.W))
       write_num := MuxCase(0.U,Seq(
-         (write_idx1===63.U && write_idx2===63.U) -> 0.U,
-         (((write_idx1===63.U && write_idx2=/=63.U) || (write_idx1=/=63.U && write_idx2===63.U))&& (uops(0).valid || uops(1).valid)) ->1.U,
-         ((write_idx1=/=63.U && write_idx2=/=63.U ) && uops(0).valid && uops(1).valid)->2.U
+         (write_idx1===63.U || write_idx2===63.U) -> 0.U,//full
+         (!(write_idx1===63.U || write_idx2===63.U) && (uops(0).valid && uops(1).valid)) -> 2.U,
+         (!(write_idx1===63.U || write_idx2===63.U) && ((uops(0).valid && !uops(1).valid) || (!uops(0).valid && uops(1).valid))) ->1.U
       ))//需要考虑 writeidx到底能不能等于63呢,得把这个选项排除掉,得额外考虑满的情况
 
      next_max_age := issued_age_pack.max_age- issue_num + write_num
@@ -132,7 +133,9 @@ class Reservation_Station extends Module with consts{
      issued_age_pack.max_age := next_max_age
      issued_age_pack.issued_ages(0) := MuxCase(63.U,(for(i <- 0 to 63)yield(i.U===issue1_idx)->reservation_station(i).io.o_age))
      issued_age_pack.issued_ages(1) := MuxCase(63.U,(for(i <- 0 to 63)yield(i.U===issue2_idx)->reservation_station(i).io.o_age))
-     
+     when(io.i_exception){
+        issued_age_pack := 0.U.asTypeOf(new age_pack())
+     }
 
      io.o_full := issued_age_pack.max_age>60.U
 
@@ -152,6 +155,7 @@ class Reservation_Station extends Module with consts{
         (i.U===write_idx1) -> uops(0).valid,
         (i.U===write_idx2) -> uops(1).valid
       )
+
      )//Mux((i.U===write_idx1||i.U===write_idx2)&&(!io.o_full),true.B,false.B)//and we have things to write_idx1,改一改这个的逻辑,尽量让他和uopvalid解耦
      //通过加一点num_write之类的
      reservation_station(i).io.i_uop := Mux(i.U===write_idx1,uops(0),uops(1))//rewrite this with mux??
