@@ -89,7 +89,7 @@ class Decoder extends Module with consts{
 
    for(i <- 0 until 2){
      //io.o_decode_packs(i).valid := io.i_fetch_pack.valid && inst_valid(i)//to be modified//wrong!
-     io.o_decode_packs(i).valid := inst_valid(i) && uops(i).valid
+     io.o_decode_packs(i).valid := inst_valid(i) && uops(i).valid &&(!io.i_stall) && (!io.i_exception) && (!(io.i_branch_resolve_pack.valid && io.i_branch_resolve_pack.mispred))
      io.o_decode_packs(i).imm := MuxCase(0.U,Seq(
          (io.o_decode_packs(i).inst_type === I_TYPE)->immI(i),
          (io.o_decode_packs(i).inst_type === U_TYPE)->immU(i),

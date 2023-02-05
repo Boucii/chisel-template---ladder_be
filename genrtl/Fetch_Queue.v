@@ -19,8 +19,6 @@ module Fetch_Queue(
   output [31:0] io_out_bits_insts_1,
   output        io_out_bits_branch_predict_pack_valid,
   output [63:0] io_out_bits_branch_predict_pack_target,
-  output [3:0]  io_out_bits_branch_predict_pack_branch_type,
-  output        io_out_bits_branch_predict_pack_select,
   output        io_out_bits_branch_predict_pack_taken,
   output        io_full,
   input         io_i_flush
@@ -46,8 +44,6 @@ module Fetch_Queue(
   wire [31:0] queue_io_deq_bits_insts_1; // @[fetch_queue.scala 19:21]
   wire  queue_io_deq_bits_branch_predict_pack_valid; // @[fetch_queue.scala 19:21]
   wire [63:0] queue_io_deq_bits_branch_predict_pack_target; // @[fetch_queue.scala 19:21]
-  wire [3:0] queue_io_deq_bits_branch_predict_pack_branch_type; // @[fetch_queue.scala 19:21]
-  wire  queue_io_deq_bits_branch_predict_pack_select; // @[fetch_queue.scala 19:21]
   wire  queue_io_deq_bits_branch_predict_pack_taken; // @[fetch_queue.scala 19:21]
   Queue queue ( // @[fetch_queue.scala 19:21]
     .clock(queue_clock),
@@ -71,8 +67,6 @@ module Fetch_Queue(
     .io_deq_bits_insts_1(queue_io_deq_bits_insts_1),
     .io_deq_bits_branch_predict_pack_valid(queue_io_deq_bits_branch_predict_pack_valid),
     .io_deq_bits_branch_predict_pack_target(queue_io_deq_bits_branch_predict_pack_target),
-    .io_deq_bits_branch_predict_pack_branch_type(queue_io_deq_bits_branch_predict_pack_branch_type),
-    .io_deq_bits_branch_predict_pack_select(queue_io_deq_bits_branch_predict_pack_select),
     .io_deq_bits_branch_predict_pack_taken(queue_io_deq_bits_branch_predict_pack_taken)
   );
   assign io_out_valid = queue_io_deq_valid & ~queue_reset; // @[fetch_queue.scala 25:38]
@@ -83,8 +77,6 @@ module Fetch_Queue(
   assign io_out_bits_insts_1 = queue_io_deq_bits_insts_1; // @[fetch_queue.scala 24:15]
   assign io_out_bits_branch_predict_pack_valid = queue_io_deq_bits_branch_predict_pack_valid; // @[fetch_queue.scala 24:15]
   assign io_out_bits_branch_predict_pack_target = queue_io_deq_bits_branch_predict_pack_target; // @[fetch_queue.scala 24:15]
-  assign io_out_bits_branch_predict_pack_branch_type = queue_io_deq_bits_branch_predict_pack_branch_type; // @[fetch_queue.scala 24:15]
-  assign io_out_bits_branch_predict_pack_select = queue_io_deq_bits_branch_predict_pack_select; // @[fetch_queue.scala 24:15]
   assign io_out_bits_branch_predict_pack_taken = queue_io_deq_bits_branch_predict_pack_taken; // @[fetch_queue.scala 24:15]
   assign io_full = ~queue_io_enq_ready; // @[fetch_queue.scala 28:14]
   assign queue_clock = clock;

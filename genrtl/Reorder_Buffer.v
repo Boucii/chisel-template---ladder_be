@@ -794,31 +794,31 @@ module Reorder_Buffer(
   reg [6:0] allocate_ptr; // @[rob.scala 47:31]
   reg [1:0] rob_state; // @[rob.scala 53:28]
   reg  last_pc_redirect; // @[rob.scala 55:31]
-  wire  _next_rob_state_T_2 = rob_state == 2'h0; // @[rob.scala 214:18]
-  wire  _next_rob_state_T_3 = rob_state == 2'h1; // @[rob.scala 215:18]
-  wire [6:0] _is_full_T_1 = allocate_ptr + 7'h2; // @[rob.scala 207:30]
-  wire [6:0] _is_full_T_4 = allocate_ptr + 7'h1; // @[rob.scala 207:69]
-  wire  is_full = _is_full_T_1 == commit_ptr | _is_full_T_4 == commit_ptr; // @[rob.scala 207:52]
-  wire  _next_rob_state_T_4 = rob_state == 2'h1 & is_full; // @[rob.scala 215:31]
-  wire  _next_rob_state_T_7 = _next_rob_state_T_3 & (io_i_branch_resolve_pack_mispred & io_i_branch_resolve_pack_valid); // @[rob.scala 216:32]
-  wire [6:0] _next_rob_state_T_10 = allocate_ptr - 7'h1; // @[rob.scala 217:87]
-  wire [7:0] _GEN_41740 = {{1'd0}, _next_rob_state_T_10}; // @[rob.scala 217:71]
-  wire [6:0] _next_rob_state_T_13 = allocate_ptr - 7'h2; // @[rob.scala 218:70]
-  wire [7:0] _GEN_41741 = {{1'd0}, _next_rob_state_T_13}; // @[rob.scala 218:54]
-  wire  _next_rob_state_T_14 = io_i_branch_resolve_pack_rob_idx == _GEN_41741; // @[rob.scala 218:54]
-  wire  _next_rob_state_T_16 = rob_state == 2'h2 & (io_i_branch_resolve_pack_rob_idx == _GEN_41740 |
-    _next_rob_state_T_14); // @[rob.scala 217:33]
+  wire  _next_rob_state_T_2 = rob_state == 2'h0; // @[rob.scala 215:18]
+  wire  _next_rob_state_T_3 = rob_state == 2'h1; // @[rob.scala 216:18]
+  wire [6:0] _is_full_T_1 = allocate_ptr + 7'h2; // @[rob.scala 208:30]
+  wire [6:0] _is_full_T_4 = allocate_ptr + 7'h1; // @[rob.scala 208:69]
+  wire  is_full = _is_full_T_1 == commit_ptr | _is_full_T_4 == commit_ptr; // @[rob.scala 208:52]
+  wire  _next_rob_state_T_4 = rob_state == 2'h1 & is_full; // @[rob.scala 216:31]
+  wire  _next_rob_state_T_7 = _next_rob_state_T_3 & (io_i_branch_resolve_pack_mispred & io_i_branch_resolve_pack_valid); // @[rob.scala 217:32]
+  wire [6:0] _next_rob_state_T_10 = allocate_ptr - 7'h1; // @[rob.scala 218:87]
+  wire [7:0] _GEN_41868 = {{1'd0}, _next_rob_state_T_10}; // @[rob.scala 218:71]
+  wire [6:0] _next_rob_state_T_13 = allocate_ptr - 7'h2; // @[rob.scala 219:70]
+  wire [7:0] _GEN_41869 = {{1'd0}, _next_rob_state_T_13}; // @[rob.scala 219:54]
+  wire  _next_rob_state_T_14 = io_i_branch_resolve_pack_rob_idx == _GEN_41869; // @[rob.scala 219:54]
+  wire  _next_rob_state_T_16 = rob_state == 2'h2 & (io_i_branch_resolve_pack_rob_idx == _GEN_41868 |
+    _next_rob_state_T_14); // @[rob.scala 218:33]
   reg  will_commit_0; // @[rob.scala 89:30]
-  wire  _next_rob_state_T_18 = rob_state == 2'h3 & will_commit_0; // @[rob.scala 219:29]
+  wire  _next_rob_state_T_18 = rob_state == 2'h3 & will_commit_0; // @[rob.scala 220:29]
   wire [1:0] _next_rob_state_T_19 = _next_rob_state_T_18 ? 2'h1 : rob_state; // @[Mux.scala 101:16]
   wire [1:0] _next_rob_state_T_20 = _next_rob_state_T_16 ? 2'h1 : _next_rob_state_T_19; // @[Mux.scala 101:16]
   wire [1:0] _next_rob_state_T_21 = _next_rob_state_T_7 ? 2'h2 : _next_rob_state_T_20; // @[Mux.scala 101:16]
   wire [1:0] _next_rob_state_T_22 = _next_rob_state_T_4 ? 2'h3 : _next_rob_state_T_21; // @[Mux.scala 101:16]
   wire [1:0] _next_rob_state_T_23 = _next_rob_state_T_2 ? 2'h1 : _next_rob_state_T_22; // @[Mux.scala 101:16]
-  wire [1:0] next_rob_state = io_o_exception | io_i_interrupt | last_pc_redirect ? 2'h0 : _next_rob_state_T_23; // @[rob.scala 213:24]
+  wire [1:0] next_rob_state = io_o_exception | io_i_interrupt | last_pc_redirect ? 2'h0 : _next_rob_state_T_23; // @[rob.scala 214:24]
   wire  _this_num_to_roll_back_T = next_rob_state == 2'h2; // @[rob.scala 74:23]
-  wire  _this_num_to_roll_back_T_4 = next_rob_state == 2'h2 & _GEN_41741 > io_i_branch_resolve_pack_rob_idx; // @[rob.scala 74:38]
-  wire  _this_num_to_roll_back_T_9 = _this_num_to_roll_back_T & _GEN_41741 == io_i_branch_resolve_pack_rob_idx; // @[rob.scala 75:38]
+  wire  _this_num_to_roll_back_T_4 = next_rob_state == 2'h2 & _GEN_41869 > io_i_branch_resolve_pack_rob_idx; // @[rob.scala 74:38]
+  wire  _this_num_to_roll_back_T_9 = _this_num_to_roll_back_T & _GEN_41869 == io_i_branch_resolve_pack_rob_idx; // @[rob.scala 75:38]
   wire [1:0] _this_num_to_roll_back_T_17 = _this_num_to_roll_back_T_4 ? 2'h2 : {{1'd0}, _this_num_to_roll_back_T_9}; // @[Mux.scala 101:16]
   reg  rob_valid_0; // @[rob.scala 81:28]
   reg  rob_valid_1; // @[rob.scala 81:28]
@@ -7450,133 +7450,133 @@ module Reorder_Buffer(
   wire  _GEN_19200 = io_i_rob_allocation_reqs_0_valid & io_i_rob_allocation_reqs_1_valid ? _GEN_12863 : _GEN_17088; // @[rob.scala 124:83]
   wire [6:0] _GEN_19201 = io_i_rob_allocation_reqs_0_valid & io_i_rob_allocation_reqs_1_valid ? _is_full_T_1 :
     _GEN_17024; // @[rob.scala 124:83 132:22]
-  wire  _GEN_41937 = 6'h0 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42065 = 6'h0 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19202 = 6'h0 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19073; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41938 = 6'h1 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42066 = 6'h1 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19203 = 6'h1 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19074; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41939 = 6'h2 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42067 = 6'h2 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19204 = 6'h2 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19075; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41940 = 6'h3 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42068 = 6'h3 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19205 = 6'h3 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19076; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41941 = 6'h4 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42069 = 6'h4 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19206 = 6'h4 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19077; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41942 = 6'h5 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42070 = 6'h5 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19207 = 6'h5 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19078; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41943 = 6'h6 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42071 = 6'h6 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19208 = 6'h6 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19079; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41944 = 6'h7 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42072 = 6'h7 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19209 = 6'h7 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19080; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41945 = 6'h8 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42073 = 6'h8 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19210 = 6'h8 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19081; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41946 = 6'h9 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42074 = 6'h9 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19211 = 6'h9 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19082; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41947 = 6'ha == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42075 = 6'ha == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19212 = 6'ha == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19083; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41948 = 6'hb == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42076 = 6'hb == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19213 = 6'hb == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19084; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41949 = 6'hc == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42077 = 6'hc == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19214 = 6'hc == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19085; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41950 = 6'hd == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42078 = 6'hd == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19215 = 6'hd == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19086; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41951 = 6'he == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42079 = 6'he == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19216 = 6'he == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19087; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41952 = 6'hf == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42080 = 6'hf == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19217 = 6'hf == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19088; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41953 = 6'h10 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42081 = 6'h10 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19218 = 6'h10 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19089; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41954 = 6'h11 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42082 = 6'h11 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19219 = 6'h11 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19090; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41955 = 6'h12 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42083 = 6'h12 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19220 = 6'h12 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19091; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41956 = 6'h13 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42084 = 6'h13 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19221 = 6'h13 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19092; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41957 = 6'h14 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42085 = 6'h14 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19222 = 6'h14 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19093; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41958 = 6'h15 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42086 = 6'h15 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19223 = 6'h15 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19094; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41959 = 6'h16 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42087 = 6'h16 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19224 = 6'h16 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19095; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41960 = 6'h17 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42088 = 6'h17 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19225 = 6'h17 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19096; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41961 = 6'h18 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42089 = 6'h18 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19226 = 6'h18 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19097; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41962 = 6'h19 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42090 = 6'h19 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19227 = 6'h19 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19098; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41963 = 6'h1a == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42091 = 6'h1a == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19228 = 6'h1a == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19099; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41964 = 6'h1b == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42092 = 6'h1b == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19229 = 6'h1b == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19100; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41965 = 6'h1c == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42093 = 6'h1c == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19230 = 6'h1c == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19101; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41966 = 6'h1d == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42094 = 6'h1d == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19231 = 6'h1d == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19102; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41967 = 6'h1e == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42095 = 6'h1e == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19232 = 6'h1e == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19103; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41968 = 6'h1f == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42096 = 6'h1f == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19233 = 6'h1f == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19104; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41969 = 6'h20 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42097 = 6'h20 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19234 = 6'h20 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19105; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41970 = 6'h21 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42098 = 6'h21 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19235 = 6'h21 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19106; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41971 = 6'h22 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42099 = 6'h22 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19236 = 6'h22 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19107; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41972 = 6'h23 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42100 = 6'h23 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19237 = 6'h23 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19108; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41973 = 6'h24 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42101 = 6'h24 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19238 = 6'h24 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19109; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41974 = 6'h25 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42102 = 6'h25 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19239 = 6'h25 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19110; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41975 = 6'h26 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42103 = 6'h26 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19240 = 6'h26 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19111; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41976 = 6'h27 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42104 = 6'h27 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19241 = 6'h27 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19112; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41977 = 6'h28 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42105 = 6'h28 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19242 = 6'h28 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19113; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41978 = 6'h29 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42106 = 6'h29 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19243 = 6'h29 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19114; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41979 = 6'h2a == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42107 = 6'h2a == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19244 = 6'h2a == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19115; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41980 = 6'h2b == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42108 = 6'h2b == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19245 = 6'h2b == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19116; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41981 = 6'h2c == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42109 = 6'h2c == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19246 = 6'h2c == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19117; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41982 = 6'h2d == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42110 = 6'h2d == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19247 = 6'h2d == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19118; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41983 = 6'h2e == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42111 = 6'h2e == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19248 = 6'h2e == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19119; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41984 = 6'h2f == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42112 = 6'h2f == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19249 = 6'h2f == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19120; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41985 = 6'h30 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42113 = 6'h30 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19250 = 6'h30 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19121; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41986 = 6'h31 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42114 = 6'h31 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19251 = 6'h31 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19122; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41987 = 6'h32 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42115 = 6'h32 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19252 = 6'h32 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19123; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41988 = 6'h33 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42116 = 6'h33 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19253 = 6'h33 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19124; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41989 = 6'h34 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42117 = 6'h34 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19254 = 6'h34 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19125; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41990 = 6'h35 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42118 = 6'h35 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19255 = 6'h35 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19126; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41991 = 6'h36 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42119 = 6'h36 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19256 = 6'h36 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19127; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41992 = 6'h37 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42120 = 6'h37 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19257 = 6'h37 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19128; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41993 = 6'h38 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42121 = 6'h38 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19258 = 6'h38 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19129; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41994 = 6'h39 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42122 = 6'h39 == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19259 = 6'h39 == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19130; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41995 = 6'h3a == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42123 = 6'h3a == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19260 = 6'h3a == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19131; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41996 = 6'h3b == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42124 = 6'h3b == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19261 = 6'h3b == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19132; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41997 = 6'h3c == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42125 = 6'h3c == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19262 = 6'h3c == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19133; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41998 = 6'h3d == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42126 = 6'h3d == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19263 = 6'h3d == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19134; // @[rob.scala 142:{53,53}]
-  wire  _GEN_41999 = 6'h3e == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42127 = 6'h3e == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19264 = 6'h3e == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19135; // @[rob.scala 142:{53,53}]
-  wire  _GEN_42000 = 6'h3f == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
+  wire  _GEN_42128 = 6'h3f == io_i_ex_res_packs_0_uop_rob_idx[5:0]; // @[rob.scala 142:{53,53}]
   wire  _GEN_19265 = 6'h3f == io_i_ex_res_packs_0_uop_rob_idx[5:0] | _GEN_19136; // @[rob.scala 142:{53,53}]
   wire [31:0] _GEN_19330 = 6'h0 == io_i_ex_res_packs_0_uop_rob_idx[5:0] ? io_i_ex_res_packs_0_uop_pc : _GEN_17153; // @[rob.scala 143:{51,51}]
   wire [31:0] _GEN_19331 = 6'h1 == io_i_ex_res_packs_0_uop_rob_idx[5:0] ? io_i_ex_res_packs_0_uop_pc : _GEN_17154; // @[rob.scala 143:{51,51}]
@@ -8378,70 +8378,70 @@ module Reorder_Buffer(
   wire [4:0] _GEN_21119 = 6'h3d == io_i_ex_res_packs_0_uop_rob_idx[5:0] ? io_i_ex_res_packs_0_uop_alu_sel : _GEN_18942; // @[rob.scala 143:{51,51}]
   wire [4:0] _GEN_21120 = 6'h3e == io_i_ex_res_packs_0_uop_rob_idx[5:0] ? io_i_ex_res_packs_0_uop_alu_sel : _GEN_18943; // @[rob.scala 143:{51,51}]
   wire [4:0] _GEN_21121 = 6'h3f == io_i_ex_res_packs_0_uop_rob_idx[5:0] ? io_i_ex_res_packs_0_uop_alu_sel : _GEN_18944; // @[rob.scala 143:{51,51}]
-  wire  _GEN_21314 = _GEN_41937 | _GEN_19137; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21315 = _GEN_41938 | _GEN_19138; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21316 = _GEN_41939 | _GEN_19139; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21317 = _GEN_41940 | _GEN_19140; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21318 = _GEN_41941 | _GEN_19141; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21319 = _GEN_41942 | _GEN_19142; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21320 = _GEN_41943 | _GEN_19143; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21321 = _GEN_41944 | _GEN_19144; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21322 = _GEN_41945 | _GEN_19145; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21323 = _GEN_41946 | _GEN_19146; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21324 = _GEN_41947 | _GEN_19147; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21325 = _GEN_41948 | _GEN_19148; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21326 = _GEN_41949 | _GEN_19149; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21327 = _GEN_41950 | _GEN_19150; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21328 = _GEN_41951 | _GEN_19151; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21329 = _GEN_41952 | _GEN_19152; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21330 = _GEN_41953 | _GEN_19153; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21331 = _GEN_41954 | _GEN_19154; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21332 = _GEN_41955 | _GEN_19155; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21333 = _GEN_41956 | _GEN_19156; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21334 = _GEN_41957 | _GEN_19157; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21335 = _GEN_41958 | _GEN_19158; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21336 = _GEN_41959 | _GEN_19159; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21337 = _GEN_41960 | _GEN_19160; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21338 = _GEN_41961 | _GEN_19161; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21339 = _GEN_41962 | _GEN_19162; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21340 = _GEN_41963 | _GEN_19163; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21341 = _GEN_41964 | _GEN_19164; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21342 = _GEN_41965 | _GEN_19165; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21343 = _GEN_41966 | _GEN_19166; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21344 = _GEN_41967 | _GEN_19167; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21345 = _GEN_41968 | _GEN_19168; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21346 = _GEN_41969 | _GEN_19169; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21347 = _GEN_41970 | _GEN_19170; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21348 = _GEN_41971 | _GEN_19171; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21349 = _GEN_41972 | _GEN_19172; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21350 = _GEN_41973 | _GEN_19173; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21351 = _GEN_41974 | _GEN_19174; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21352 = _GEN_41975 | _GEN_19175; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21353 = _GEN_41976 | _GEN_19176; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21354 = _GEN_41977 | _GEN_19177; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21355 = _GEN_41978 | _GEN_19178; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21356 = _GEN_41979 | _GEN_19179; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21357 = _GEN_41980 | _GEN_19180; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21358 = _GEN_41981 | _GEN_19181; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21359 = _GEN_41982 | _GEN_19182; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21360 = _GEN_41983 | _GEN_19183; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21361 = _GEN_41984 | _GEN_19184; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21362 = _GEN_41985 | _GEN_19185; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21363 = _GEN_41986 | _GEN_19186; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21364 = _GEN_41987 | _GEN_19187; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21365 = _GEN_41988 | _GEN_19188; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21366 = _GEN_41989 | _GEN_19189; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21367 = _GEN_41990 | _GEN_19190; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21368 = _GEN_41991 | _GEN_19191; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21369 = _GEN_41992 | _GEN_19192; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21370 = _GEN_41993 | _GEN_19193; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21371 = _GEN_41994 | _GEN_19194; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21372 = _GEN_41995 | _GEN_19195; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21373 = _GEN_41996 | _GEN_19196; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21374 = _GEN_41997 | _GEN_19197; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21375 = _GEN_41998 | _GEN_19198; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21376 = _GEN_41999 | _GEN_19199; // @[rob.scala 145:{52,52}]
-  wire  _GEN_21377 = _GEN_42000 | _GEN_19200; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21314 = _GEN_42065 | _GEN_19137; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21315 = _GEN_42066 | _GEN_19138; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21316 = _GEN_42067 | _GEN_19139; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21317 = _GEN_42068 | _GEN_19140; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21318 = _GEN_42069 | _GEN_19141; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21319 = _GEN_42070 | _GEN_19142; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21320 = _GEN_42071 | _GEN_19143; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21321 = _GEN_42072 | _GEN_19144; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21322 = _GEN_42073 | _GEN_19145; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21323 = _GEN_42074 | _GEN_19146; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21324 = _GEN_42075 | _GEN_19147; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21325 = _GEN_42076 | _GEN_19148; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21326 = _GEN_42077 | _GEN_19149; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21327 = _GEN_42078 | _GEN_19150; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21328 = _GEN_42079 | _GEN_19151; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21329 = _GEN_42080 | _GEN_19152; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21330 = _GEN_42081 | _GEN_19153; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21331 = _GEN_42082 | _GEN_19154; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21332 = _GEN_42083 | _GEN_19155; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21333 = _GEN_42084 | _GEN_19156; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21334 = _GEN_42085 | _GEN_19157; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21335 = _GEN_42086 | _GEN_19158; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21336 = _GEN_42087 | _GEN_19159; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21337 = _GEN_42088 | _GEN_19160; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21338 = _GEN_42089 | _GEN_19161; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21339 = _GEN_42090 | _GEN_19162; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21340 = _GEN_42091 | _GEN_19163; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21341 = _GEN_42092 | _GEN_19164; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21342 = _GEN_42093 | _GEN_19165; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21343 = _GEN_42094 | _GEN_19166; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21344 = _GEN_42095 | _GEN_19167; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21345 = _GEN_42096 | _GEN_19168; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21346 = _GEN_42097 | _GEN_19169; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21347 = _GEN_42098 | _GEN_19170; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21348 = _GEN_42099 | _GEN_19171; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21349 = _GEN_42100 | _GEN_19172; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21350 = _GEN_42101 | _GEN_19173; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21351 = _GEN_42102 | _GEN_19174; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21352 = _GEN_42103 | _GEN_19175; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21353 = _GEN_42104 | _GEN_19176; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21354 = _GEN_42105 | _GEN_19177; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21355 = _GEN_42106 | _GEN_19178; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21356 = _GEN_42107 | _GEN_19179; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21357 = _GEN_42108 | _GEN_19180; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21358 = _GEN_42109 | _GEN_19181; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21359 = _GEN_42110 | _GEN_19182; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21360 = _GEN_42111 | _GEN_19183; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21361 = _GEN_42112 | _GEN_19184; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21362 = _GEN_42113 | _GEN_19185; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21363 = _GEN_42114 | _GEN_19186; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21364 = _GEN_42115 | _GEN_19187; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21365 = _GEN_42116 | _GEN_19188; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21366 = _GEN_42117 | _GEN_19189; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21367 = _GEN_42118 | _GEN_19190; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21368 = _GEN_42119 | _GEN_19191; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21369 = _GEN_42120 | _GEN_19192; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21370 = _GEN_42121 | _GEN_19193; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21371 = _GEN_42122 | _GEN_19194; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21372 = _GEN_42123 | _GEN_19195; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21373 = _GEN_42124 | _GEN_19196; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21374 = _GEN_42125 | _GEN_19197; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21375 = _GEN_42126 | _GEN_19198; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21376 = _GEN_42127 | _GEN_19199; // @[rob.scala 145:{52,52}]
+  wire  _GEN_21377 = _GEN_42128 | _GEN_19200; // @[rob.scala 145:{52,52}]
   wire  _GEN_21378 = io_i_ex_res_packs_0_valid ? _GEN_19202 : _GEN_19073; // @[rob.scala 141:39]
   wire  _GEN_21379 = io_i_ex_res_packs_0_valid ? _GEN_19203 : _GEN_19074; // @[rob.scala 141:39]
   wire  _GEN_21380 = io_i_ex_res_packs_0_valid ? _GEN_19204 : _GEN_19075; // @[rob.scala 141:39]
@@ -9146,133 +9146,133 @@ module Reorder_Buffer(
   wire  _GEN_23551 = io_i_ex_res_packs_0_valid ? _GEN_21375 : _GEN_19198; // @[rob.scala 141:39]
   wire  _GEN_23552 = io_i_ex_res_packs_0_valid ? _GEN_21376 : _GEN_19199; // @[rob.scala 141:39]
   wire  _GEN_23553 = io_i_ex_res_packs_0_valid ? _GEN_21377 : _GEN_19200; // @[rob.scala 141:39]
-  wire  _GEN_42065 = 6'h0 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42193 = 6'h0 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23554 = 6'h0 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21378; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42066 = 6'h1 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42194 = 6'h1 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23555 = 6'h1 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21379; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42067 = 6'h2 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42195 = 6'h2 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23556 = 6'h2 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21380; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42068 = 6'h3 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42196 = 6'h3 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23557 = 6'h3 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21381; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42069 = 6'h4 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42197 = 6'h4 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23558 = 6'h4 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21382; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42070 = 6'h5 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42198 = 6'h5 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23559 = 6'h5 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21383; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42071 = 6'h6 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42199 = 6'h6 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23560 = 6'h6 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21384; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42072 = 6'h7 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42200 = 6'h7 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23561 = 6'h7 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21385; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42073 = 6'h8 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42201 = 6'h8 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23562 = 6'h8 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21386; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42074 = 6'h9 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42202 = 6'h9 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23563 = 6'h9 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21387; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42075 = 6'ha == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42203 = 6'ha == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23564 = 6'ha == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21388; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42076 = 6'hb == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42204 = 6'hb == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23565 = 6'hb == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21389; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42077 = 6'hc == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42205 = 6'hc == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23566 = 6'hc == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21390; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42078 = 6'hd == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42206 = 6'hd == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23567 = 6'hd == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21391; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42079 = 6'he == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42207 = 6'he == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23568 = 6'he == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21392; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42080 = 6'hf == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42208 = 6'hf == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23569 = 6'hf == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21393; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42081 = 6'h10 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42209 = 6'h10 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23570 = 6'h10 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21394; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42082 = 6'h11 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42210 = 6'h11 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23571 = 6'h11 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21395; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42083 = 6'h12 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42211 = 6'h12 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23572 = 6'h12 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21396; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42084 = 6'h13 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42212 = 6'h13 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23573 = 6'h13 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21397; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42085 = 6'h14 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42213 = 6'h14 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23574 = 6'h14 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21398; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42086 = 6'h15 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42214 = 6'h15 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23575 = 6'h15 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21399; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42087 = 6'h16 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42215 = 6'h16 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23576 = 6'h16 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21400; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42088 = 6'h17 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42216 = 6'h17 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23577 = 6'h17 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21401; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42089 = 6'h18 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42217 = 6'h18 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23578 = 6'h18 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21402; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42090 = 6'h19 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42218 = 6'h19 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23579 = 6'h19 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21403; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42091 = 6'h1a == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42219 = 6'h1a == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23580 = 6'h1a == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21404; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42092 = 6'h1b == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42220 = 6'h1b == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23581 = 6'h1b == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21405; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42093 = 6'h1c == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42221 = 6'h1c == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23582 = 6'h1c == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21406; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42094 = 6'h1d == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42222 = 6'h1d == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23583 = 6'h1d == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21407; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42095 = 6'h1e == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42223 = 6'h1e == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23584 = 6'h1e == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21408; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42096 = 6'h1f == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42224 = 6'h1f == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23585 = 6'h1f == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21409; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42097 = 6'h20 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42225 = 6'h20 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23586 = 6'h20 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21410; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42098 = 6'h21 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42226 = 6'h21 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23587 = 6'h21 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21411; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42099 = 6'h22 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42227 = 6'h22 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23588 = 6'h22 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21412; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42100 = 6'h23 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42228 = 6'h23 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23589 = 6'h23 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21413; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42101 = 6'h24 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42229 = 6'h24 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23590 = 6'h24 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21414; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42102 = 6'h25 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42230 = 6'h25 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23591 = 6'h25 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21415; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42103 = 6'h26 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42231 = 6'h26 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23592 = 6'h26 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21416; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42104 = 6'h27 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42232 = 6'h27 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23593 = 6'h27 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21417; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42105 = 6'h28 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42233 = 6'h28 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23594 = 6'h28 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21418; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42106 = 6'h29 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42234 = 6'h29 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23595 = 6'h29 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21419; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42107 = 6'h2a == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42235 = 6'h2a == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23596 = 6'h2a == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21420; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42108 = 6'h2b == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42236 = 6'h2b == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23597 = 6'h2b == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21421; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42109 = 6'h2c == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42237 = 6'h2c == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23598 = 6'h2c == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21422; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42110 = 6'h2d == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42238 = 6'h2d == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23599 = 6'h2d == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21423; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42111 = 6'h2e == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42239 = 6'h2e == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23600 = 6'h2e == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21424; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42112 = 6'h2f == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42240 = 6'h2f == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23601 = 6'h2f == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21425; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42113 = 6'h30 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42241 = 6'h30 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23602 = 6'h30 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21426; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42114 = 6'h31 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42242 = 6'h31 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23603 = 6'h31 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21427; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42115 = 6'h32 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42243 = 6'h32 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23604 = 6'h32 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21428; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42116 = 6'h33 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42244 = 6'h33 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23605 = 6'h33 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21429; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42117 = 6'h34 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42245 = 6'h34 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23606 = 6'h34 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21430; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42118 = 6'h35 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42246 = 6'h35 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23607 = 6'h35 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21431; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42119 = 6'h36 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42247 = 6'h36 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23608 = 6'h36 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21432; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42120 = 6'h37 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42248 = 6'h37 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23609 = 6'h37 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21433; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42121 = 6'h38 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42249 = 6'h38 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23610 = 6'h38 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21434; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42122 = 6'h39 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42250 = 6'h39 == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23611 = 6'h39 == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21435; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42123 = 6'h3a == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42251 = 6'h3a == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23612 = 6'h3a == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21436; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42124 = 6'h3b == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42252 = 6'h3b == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23613 = 6'h3b == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21437; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42125 = 6'h3c == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42253 = 6'h3c == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23614 = 6'h3c == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21438; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42126 = 6'h3d == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42254 = 6'h3d == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23615 = 6'h3d == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21439; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42127 = 6'h3e == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42255 = 6'h3e == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23616 = 6'h3e == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21440; // @[rob.scala 148:{53,53}]
-  wire  _GEN_42128 = 6'h3f == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
+  wire  _GEN_42256 = 6'h3f == io_i_ex_res_packs_1_uop_rob_idx[5:0]; // @[rob.scala 148:{53,53}]
   wire  _GEN_23617 = 6'h3f == io_i_ex_res_packs_1_uop_rob_idx[5:0] | _GEN_21441; // @[rob.scala 148:{53,53}]
   wire [31:0] _GEN_23682 = 6'h0 == io_i_ex_res_packs_1_uop_rob_idx[5:0] ? io_i_ex_res_packs_1_uop_pc : _GEN_21506; // @[rob.scala 149:{51,51}]
   wire [31:0] _GEN_23683 = 6'h1 == io_i_ex_res_packs_1_uop_rob_idx[5:0] ? io_i_ex_res_packs_1_uop_pc : _GEN_21507; // @[rob.scala 149:{51,51}]
@@ -10074,70 +10074,70 @@ module Reorder_Buffer(
   wire [4:0] _GEN_25471 = 6'h3d == io_i_ex_res_packs_1_uop_rob_idx[5:0] ? io_i_ex_res_packs_1_uop_alu_sel : _GEN_23295; // @[rob.scala 149:{51,51}]
   wire [4:0] _GEN_25472 = 6'h3e == io_i_ex_res_packs_1_uop_rob_idx[5:0] ? io_i_ex_res_packs_1_uop_alu_sel : _GEN_23296; // @[rob.scala 149:{51,51}]
   wire [4:0] _GEN_25473 = 6'h3f == io_i_ex_res_packs_1_uop_rob_idx[5:0] ? io_i_ex_res_packs_1_uop_alu_sel : _GEN_23297; // @[rob.scala 149:{51,51}]
-  wire  _GEN_25666 = _GEN_42065 | _GEN_23490; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25667 = _GEN_42066 | _GEN_23491; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25668 = _GEN_42067 | _GEN_23492; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25669 = _GEN_42068 | _GEN_23493; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25670 = _GEN_42069 | _GEN_23494; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25671 = _GEN_42070 | _GEN_23495; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25672 = _GEN_42071 | _GEN_23496; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25673 = _GEN_42072 | _GEN_23497; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25674 = _GEN_42073 | _GEN_23498; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25675 = _GEN_42074 | _GEN_23499; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25676 = _GEN_42075 | _GEN_23500; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25677 = _GEN_42076 | _GEN_23501; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25678 = _GEN_42077 | _GEN_23502; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25679 = _GEN_42078 | _GEN_23503; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25680 = _GEN_42079 | _GEN_23504; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25681 = _GEN_42080 | _GEN_23505; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25682 = _GEN_42081 | _GEN_23506; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25683 = _GEN_42082 | _GEN_23507; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25684 = _GEN_42083 | _GEN_23508; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25685 = _GEN_42084 | _GEN_23509; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25686 = _GEN_42085 | _GEN_23510; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25687 = _GEN_42086 | _GEN_23511; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25688 = _GEN_42087 | _GEN_23512; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25689 = _GEN_42088 | _GEN_23513; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25690 = _GEN_42089 | _GEN_23514; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25691 = _GEN_42090 | _GEN_23515; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25692 = _GEN_42091 | _GEN_23516; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25693 = _GEN_42092 | _GEN_23517; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25694 = _GEN_42093 | _GEN_23518; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25695 = _GEN_42094 | _GEN_23519; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25696 = _GEN_42095 | _GEN_23520; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25697 = _GEN_42096 | _GEN_23521; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25698 = _GEN_42097 | _GEN_23522; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25699 = _GEN_42098 | _GEN_23523; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25700 = _GEN_42099 | _GEN_23524; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25701 = _GEN_42100 | _GEN_23525; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25702 = _GEN_42101 | _GEN_23526; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25703 = _GEN_42102 | _GEN_23527; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25704 = _GEN_42103 | _GEN_23528; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25705 = _GEN_42104 | _GEN_23529; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25706 = _GEN_42105 | _GEN_23530; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25707 = _GEN_42106 | _GEN_23531; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25708 = _GEN_42107 | _GEN_23532; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25709 = _GEN_42108 | _GEN_23533; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25710 = _GEN_42109 | _GEN_23534; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25711 = _GEN_42110 | _GEN_23535; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25712 = _GEN_42111 | _GEN_23536; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25713 = _GEN_42112 | _GEN_23537; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25714 = _GEN_42113 | _GEN_23538; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25715 = _GEN_42114 | _GEN_23539; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25716 = _GEN_42115 | _GEN_23540; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25717 = _GEN_42116 | _GEN_23541; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25718 = _GEN_42117 | _GEN_23542; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25719 = _GEN_42118 | _GEN_23543; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25720 = _GEN_42119 | _GEN_23544; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25721 = _GEN_42120 | _GEN_23545; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25722 = _GEN_42121 | _GEN_23546; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25723 = _GEN_42122 | _GEN_23547; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25724 = _GEN_42123 | _GEN_23548; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25725 = _GEN_42124 | _GEN_23549; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25726 = _GEN_42125 | _GEN_23550; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25727 = _GEN_42126 | _GEN_23551; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25728 = _GEN_42127 | _GEN_23552; // @[rob.scala 151:{52,52}]
-  wire  _GEN_25729 = _GEN_42128 | _GEN_23553; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25666 = _GEN_42193 | _GEN_23490; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25667 = _GEN_42194 | _GEN_23491; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25668 = _GEN_42195 | _GEN_23492; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25669 = _GEN_42196 | _GEN_23493; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25670 = _GEN_42197 | _GEN_23494; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25671 = _GEN_42198 | _GEN_23495; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25672 = _GEN_42199 | _GEN_23496; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25673 = _GEN_42200 | _GEN_23497; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25674 = _GEN_42201 | _GEN_23498; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25675 = _GEN_42202 | _GEN_23499; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25676 = _GEN_42203 | _GEN_23500; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25677 = _GEN_42204 | _GEN_23501; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25678 = _GEN_42205 | _GEN_23502; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25679 = _GEN_42206 | _GEN_23503; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25680 = _GEN_42207 | _GEN_23504; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25681 = _GEN_42208 | _GEN_23505; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25682 = _GEN_42209 | _GEN_23506; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25683 = _GEN_42210 | _GEN_23507; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25684 = _GEN_42211 | _GEN_23508; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25685 = _GEN_42212 | _GEN_23509; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25686 = _GEN_42213 | _GEN_23510; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25687 = _GEN_42214 | _GEN_23511; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25688 = _GEN_42215 | _GEN_23512; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25689 = _GEN_42216 | _GEN_23513; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25690 = _GEN_42217 | _GEN_23514; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25691 = _GEN_42218 | _GEN_23515; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25692 = _GEN_42219 | _GEN_23516; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25693 = _GEN_42220 | _GEN_23517; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25694 = _GEN_42221 | _GEN_23518; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25695 = _GEN_42222 | _GEN_23519; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25696 = _GEN_42223 | _GEN_23520; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25697 = _GEN_42224 | _GEN_23521; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25698 = _GEN_42225 | _GEN_23522; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25699 = _GEN_42226 | _GEN_23523; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25700 = _GEN_42227 | _GEN_23524; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25701 = _GEN_42228 | _GEN_23525; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25702 = _GEN_42229 | _GEN_23526; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25703 = _GEN_42230 | _GEN_23527; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25704 = _GEN_42231 | _GEN_23528; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25705 = _GEN_42232 | _GEN_23529; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25706 = _GEN_42233 | _GEN_23530; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25707 = _GEN_42234 | _GEN_23531; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25708 = _GEN_42235 | _GEN_23532; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25709 = _GEN_42236 | _GEN_23533; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25710 = _GEN_42237 | _GEN_23534; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25711 = _GEN_42238 | _GEN_23535; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25712 = _GEN_42239 | _GEN_23536; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25713 = _GEN_42240 | _GEN_23537; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25714 = _GEN_42241 | _GEN_23538; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25715 = _GEN_42242 | _GEN_23539; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25716 = _GEN_42243 | _GEN_23540; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25717 = _GEN_42244 | _GEN_23541; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25718 = _GEN_42245 | _GEN_23542; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25719 = _GEN_42246 | _GEN_23543; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25720 = _GEN_42247 | _GEN_23544; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25721 = _GEN_42248 | _GEN_23545; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25722 = _GEN_42249 | _GEN_23546; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25723 = _GEN_42250 | _GEN_23547; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25724 = _GEN_42251 | _GEN_23548; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25725 = _GEN_42252 | _GEN_23549; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25726 = _GEN_42253 | _GEN_23550; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25727 = _GEN_42254 | _GEN_23551; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25728 = _GEN_42255 | _GEN_23552; // @[rob.scala 151:{52,52}]
+  wire  _GEN_25729 = _GEN_42256 | _GEN_23553; // @[rob.scala 151:{52,52}]
   wire  _GEN_25730 = io_i_ex_res_packs_1_valid ? _GEN_23554 : _GEN_21378; // @[rob.scala 147:39]
   wire  _GEN_25731 = io_i_ex_res_packs_1_valid ? _GEN_23555 : _GEN_21379; // @[rob.scala 147:39]
   wire  _GEN_25732 = io_i_ex_res_packs_1_valid ? _GEN_23556 : _GEN_21380; // @[rob.scala 147:39]
@@ -11807,70 +11807,70 @@ module Reorder_Buffer(
   wire  _GEN_30338 = _next_will_commit_0_T_5 ? _GEN_27904 : rob_done_62; // @[rob.scala 123:38 84:27]
   wire  _GEN_30339 = _next_will_commit_0_T_5 ? _GEN_27905 : rob_done_63; // @[rob.scala 123:38 84:27]
   wire [6:0] _GEN_30405 = _next_will_commit_0_T_5 ? _GEN_28227 : commit_ptr; // @[rob.scala 123:38 46:29]
-  wire  _GEN_30406 = _GEN_41937 | _GEN_30212; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30407 = _GEN_41938 | _GEN_30213; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30408 = _GEN_41939 | _GEN_30214; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30409 = _GEN_41940 | _GEN_30215; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30410 = _GEN_41941 | _GEN_30216; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30411 = _GEN_41942 | _GEN_30217; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30412 = _GEN_41943 | _GEN_30218; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30413 = _GEN_41944 | _GEN_30219; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30414 = _GEN_41945 | _GEN_30220; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30415 = _GEN_41946 | _GEN_30221; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30416 = _GEN_41947 | _GEN_30222; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30417 = _GEN_41948 | _GEN_30223; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30418 = _GEN_41949 | _GEN_30224; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30419 = _GEN_41950 | _GEN_30225; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30420 = _GEN_41951 | _GEN_30226; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30421 = _GEN_41952 | _GEN_30227; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30422 = _GEN_41953 | _GEN_30228; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30423 = _GEN_41954 | _GEN_30229; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30424 = _GEN_41955 | _GEN_30230; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30425 = _GEN_41956 | _GEN_30231; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30426 = _GEN_41957 | _GEN_30232; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30427 = _GEN_41958 | _GEN_30233; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30428 = _GEN_41959 | _GEN_30234; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30429 = _GEN_41960 | _GEN_30235; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30430 = _GEN_41961 | _GEN_30236; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30431 = _GEN_41962 | _GEN_30237; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30432 = _GEN_41963 | _GEN_30238; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30433 = _GEN_41964 | _GEN_30239; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30434 = _GEN_41965 | _GEN_30240; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30435 = _GEN_41966 | _GEN_30241; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30436 = _GEN_41967 | _GEN_30242; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30437 = _GEN_41968 | _GEN_30243; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30438 = _GEN_41969 | _GEN_30244; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30439 = _GEN_41970 | _GEN_30245; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30440 = _GEN_41971 | _GEN_30246; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30441 = _GEN_41972 | _GEN_30247; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30442 = _GEN_41973 | _GEN_30248; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30443 = _GEN_41974 | _GEN_30249; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30444 = _GEN_41975 | _GEN_30250; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30445 = _GEN_41976 | _GEN_30251; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30446 = _GEN_41977 | _GEN_30252; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30447 = _GEN_41978 | _GEN_30253; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30448 = _GEN_41979 | _GEN_30254; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30449 = _GEN_41980 | _GEN_30255; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30450 = _GEN_41981 | _GEN_30256; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30451 = _GEN_41982 | _GEN_30257; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30452 = _GEN_41983 | _GEN_30258; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30453 = _GEN_41984 | _GEN_30259; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30454 = _GEN_41985 | _GEN_30260; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30455 = _GEN_41986 | _GEN_30261; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30456 = _GEN_41987 | _GEN_30262; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30457 = _GEN_41988 | _GEN_30263; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30458 = _GEN_41989 | _GEN_30264; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30459 = _GEN_41990 | _GEN_30265; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30460 = _GEN_41991 | _GEN_30266; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30461 = _GEN_41992 | _GEN_30267; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30462 = _GEN_41993 | _GEN_30268; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30463 = _GEN_41994 | _GEN_30269; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30464 = _GEN_41995 | _GEN_30270; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30465 = _GEN_41996 | _GEN_30271; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30466 = _GEN_41997 | _GEN_30272; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30467 = _GEN_41998 | _GEN_30273; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30468 = _GEN_41999 | _GEN_30274; // @[rob.scala 167:{53,53}]
-  wire  _GEN_30469 = _GEN_42000 | _GEN_30275; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30406 = _GEN_42065 | _GEN_30212; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30407 = _GEN_42066 | _GEN_30213; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30408 = _GEN_42067 | _GEN_30214; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30409 = _GEN_42068 | _GEN_30215; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30410 = _GEN_42069 | _GEN_30216; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30411 = _GEN_42070 | _GEN_30217; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30412 = _GEN_42071 | _GEN_30218; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30413 = _GEN_42072 | _GEN_30219; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30414 = _GEN_42073 | _GEN_30220; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30415 = _GEN_42074 | _GEN_30221; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30416 = _GEN_42075 | _GEN_30222; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30417 = _GEN_42076 | _GEN_30223; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30418 = _GEN_42077 | _GEN_30224; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30419 = _GEN_42078 | _GEN_30225; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30420 = _GEN_42079 | _GEN_30226; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30421 = _GEN_42080 | _GEN_30227; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30422 = _GEN_42081 | _GEN_30228; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30423 = _GEN_42082 | _GEN_30229; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30424 = _GEN_42083 | _GEN_30230; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30425 = _GEN_42084 | _GEN_30231; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30426 = _GEN_42085 | _GEN_30232; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30427 = _GEN_42086 | _GEN_30233; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30428 = _GEN_42087 | _GEN_30234; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30429 = _GEN_42088 | _GEN_30235; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30430 = _GEN_42089 | _GEN_30236; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30431 = _GEN_42090 | _GEN_30237; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30432 = _GEN_42091 | _GEN_30238; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30433 = _GEN_42092 | _GEN_30239; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30434 = _GEN_42093 | _GEN_30240; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30435 = _GEN_42094 | _GEN_30241; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30436 = _GEN_42095 | _GEN_30242; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30437 = _GEN_42096 | _GEN_30243; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30438 = _GEN_42097 | _GEN_30244; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30439 = _GEN_42098 | _GEN_30245; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30440 = _GEN_42099 | _GEN_30246; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30441 = _GEN_42100 | _GEN_30247; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30442 = _GEN_42101 | _GEN_30248; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30443 = _GEN_42102 | _GEN_30249; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30444 = _GEN_42103 | _GEN_30250; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30445 = _GEN_42104 | _GEN_30251; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30446 = _GEN_42105 | _GEN_30252; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30447 = _GEN_42106 | _GEN_30253; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30448 = _GEN_42107 | _GEN_30254; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30449 = _GEN_42108 | _GEN_30255; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30450 = _GEN_42109 | _GEN_30256; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30451 = _GEN_42110 | _GEN_30257; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30452 = _GEN_42111 | _GEN_30258; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30453 = _GEN_42112 | _GEN_30259; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30454 = _GEN_42113 | _GEN_30260; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30455 = _GEN_42114 | _GEN_30261; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30456 = _GEN_42115 | _GEN_30262; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30457 = _GEN_42116 | _GEN_30263; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30458 = _GEN_42117 | _GEN_30264; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30459 = _GEN_42118 | _GEN_30265; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30460 = _GEN_42119 | _GEN_30266; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30461 = _GEN_42120 | _GEN_30267; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30462 = _GEN_42121 | _GEN_30268; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30463 = _GEN_42122 | _GEN_30269; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30464 = _GEN_42123 | _GEN_30270; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30465 = _GEN_42124 | _GEN_30271; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30466 = _GEN_42125 | _GEN_30272; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30467 = _GEN_42126 | _GEN_30273; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30468 = _GEN_42127 | _GEN_30274; // @[rob.scala 167:{53,53}]
+  wire  _GEN_30469 = _GEN_42128 | _GEN_30275; // @[rob.scala 167:{53,53}]
   wire [31:0] _GEN_30534 = 6'h0 == io_i_ex_res_packs_0_uop_rob_idx[5:0] ? io_i_ex_res_packs_0_uop_pc : _GEN_28292; // @[rob.scala 168:{51,51}]
   wire [31:0] _GEN_30535 = 6'h1 == io_i_ex_res_packs_0_uop_rob_idx[5:0] ? io_i_ex_res_packs_0_uop_pc : _GEN_28293; // @[rob.scala 168:{51,51}]
   wire [31:0] _GEN_30536 = 6'h2 == io_i_ex_res_packs_0_uop_rob_idx[5:0] ? io_i_ex_res_packs_0_uop_pc : _GEN_28294; // @[rob.scala 168:{51,51}]
@@ -12671,70 +12671,70 @@ module Reorder_Buffer(
   wire [4:0] _GEN_32323 = 6'h3d == io_i_ex_res_packs_0_uop_rob_idx[5:0] ? io_i_ex_res_packs_0_uop_alu_sel : _GEN_30081; // @[rob.scala 168:{51,51}]
   wire [4:0] _GEN_32324 = 6'h3e == io_i_ex_res_packs_0_uop_rob_idx[5:0] ? io_i_ex_res_packs_0_uop_alu_sel : _GEN_30082; // @[rob.scala 168:{51,51}]
   wire [4:0] _GEN_32325 = 6'h3f == io_i_ex_res_packs_0_uop_rob_idx[5:0] ? io_i_ex_res_packs_0_uop_alu_sel : _GEN_30083; // @[rob.scala 168:{51,51}]
-  wire  _GEN_32518 = _GEN_41937 | _GEN_30276; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32519 = _GEN_41938 | _GEN_30277; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32520 = _GEN_41939 | _GEN_30278; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32521 = _GEN_41940 | _GEN_30279; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32522 = _GEN_41941 | _GEN_30280; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32523 = _GEN_41942 | _GEN_30281; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32524 = _GEN_41943 | _GEN_30282; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32525 = _GEN_41944 | _GEN_30283; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32526 = _GEN_41945 | _GEN_30284; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32527 = _GEN_41946 | _GEN_30285; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32528 = _GEN_41947 | _GEN_30286; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32529 = _GEN_41948 | _GEN_30287; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32530 = _GEN_41949 | _GEN_30288; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32531 = _GEN_41950 | _GEN_30289; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32532 = _GEN_41951 | _GEN_30290; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32533 = _GEN_41952 | _GEN_30291; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32534 = _GEN_41953 | _GEN_30292; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32535 = _GEN_41954 | _GEN_30293; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32536 = _GEN_41955 | _GEN_30294; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32537 = _GEN_41956 | _GEN_30295; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32538 = _GEN_41957 | _GEN_30296; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32539 = _GEN_41958 | _GEN_30297; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32540 = _GEN_41959 | _GEN_30298; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32541 = _GEN_41960 | _GEN_30299; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32542 = _GEN_41961 | _GEN_30300; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32543 = _GEN_41962 | _GEN_30301; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32544 = _GEN_41963 | _GEN_30302; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32545 = _GEN_41964 | _GEN_30303; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32546 = _GEN_41965 | _GEN_30304; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32547 = _GEN_41966 | _GEN_30305; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32548 = _GEN_41967 | _GEN_30306; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32549 = _GEN_41968 | _GEN_30307; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32550 = _GEN_41969 | _GEN_30308; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32551 = _GEN_41970 | _GEN_30309; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32552 = _GEN_41971 | _GEN_30310; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32553 = _GEN_41972 | _GEN_30311; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32554 = _GEN_41973 | _GEN_30312; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32555 = _GEN_41974 | _GEN_30313; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32556 = _GEN_41975 | _GEN_30314; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32557 = _GEN_41976 | _GEN_30315; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32558 = _GEN_41977 | _GEN_30316; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32559 = _GEN_41978 | _GEN_30317; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32560 = _GEN_41979 | _GEN_30318; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32561 = _GEN_41980 | _GEN_30319; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32562 = _GEN_41981 | _GEN_30320; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32563 = _GEN_41982 | _GEN_30321; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32564 = _GEN_41983 | _GEN_30322; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32565 = _GEN_41984 | _GEN_30323; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32566 = _GEN_41985 | _GEN_30324; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32567 = _GEN_41986 | _GEN_30325; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32568 = _GEN_41987 | _GEN_30326; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32569 = _GEN_41988 | _GEN_30327; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32570 = _GEN_41989 | _GEN_30328; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32571 = _GEN_41990 | _GEN_30329; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32572 = _GEN_41991 | _GEN_30330; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32573 = _GEN_41992 | _GEN_30331; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32574 = _GEN_41993 | _GEN_30332; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32575 = _GEN_41994 | _GEN_30333; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32576 = _GEN_41995 | _GEN_30334; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32577 = _GEN_41996 | _GEN_30335; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32578 = _GEN_41997 | _GEN_30336; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32579 = _GEN_41998 | _GEN_30337; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32580 = _GEN_41999 | _GEN_30338; // @[rob.scala 170:{52,52}]
-  wire  _GEN_32581 = _GEN_42000 | _GEN_30339; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32518 = _GEN_42065 | _GEN_30276; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32519 = _GEN_42066 | _GEN_30277; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32520 = _GEN_42067 | _GEN_30278; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32521 = _GEN_42068 | _GEN_30279; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32522 = _GEN_42069 | _GEN_30280; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32523 = _GEN_42070 | _GEN_30281; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32524 = _GEN_42071 | _GEN_30282; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32525 = _GEN_42072 | _GEN_30283; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32526 = _GEN_42073 | _GEN_30284; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32527 = _GEN_42074 | _GEN_30285; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32528 = _GEN_42075 | _GEN_30286; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32529 = _GEN_42076 | _GEN_30287; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32530 = _GEN_42077 | _GEN_30288; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32531 = _GEN_42078 | _GEN_30289; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32532 = _GEN_42079 | _GEN_30290; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32533 = _GEN_42080 | _GEN_30291; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32534 = _GEN_42081 | _GEN_30292; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32535 = _GEN_42082 | _GEN_30293; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32536 = _GEN_42083 | _GEN_30294; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32537 = _GEN_42084 | _GEN_30295; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32538 = _GEN_42085 | _GEN_30296; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32539 = _GEN_42086 | _GEN_30297; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32540 = _GEN_42087 | _GEN_30298; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32541 = _GEN_42088 | _GEN_30299; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32542 = _GEN_42089 | _GEN_30300; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32543 = _GEN_42090 | _GEN_30301; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32544 = _GEN_42091 | _GEN_30302; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32545 = _GEN_42092 | _GEN_30303; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32546 = _GEN_42093 | _GEN_30304; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32547 = _GEN_42094 | _GEN_30305; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32548 = _GEN_42095 | _GEN_30306; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32549 = _GEN_42096 | _GEN_30307; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32550 = _GEN_42097 | _GEN_30308; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32551 = _GEN_42098 | _GEN_30309; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32552 = _GEN_42099 | _GEN_30310; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32553 = _GEN_42100 | _GEN_30311; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32554 = _GEN_42101 | _GEN_30312; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32555 = _GEN_42102 | _GEN_30313; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32556 = _GEN_42103 | _GEN_30314; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32557 = _GEN_42104 | _GEN_30315; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32558 = _GEN_42105 | _GEN_30316; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32559 = _GEN_42106 | _GEN_30317; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32560 = _GEN_42107 | _GEN_30318; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32561 = _GEN_42108 | _GEN_30319; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32562 = _GEN_42109 | _GEN_30320; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32563 = _GEN_42110 | _GEN_30321; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32564 = _GEN_42111 | _GEN_30322; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32565 = _GEN_42112 | _GEN_30323; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32566 = _GEN_42113 | _GEN_30324; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32567 = _GEN_42114 | _GEN_30325; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32568 = _GEN_42115 | _GEN_30326; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32569 = _GEN_42116 | _GEN_30327; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32570 = _GEN_42117 | _GEN_30328; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32571 = _GEN_42118 | _GEN_30329; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32572 = _GEN_42119 | _GEN_30330; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32573 = _GEN_42120 | _GEN_30331; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32574 = _GEN_42121 | _GEN_30332; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32575 = _GEN_42122 | _GEN_30333; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32576 = _GEN_42123 | _GEN_30334; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32577 = _GEN_42124 | _GEN_30335; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32578 = _GEN_42125 | _GEN_30336; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32579 = _GEN_42126 | _GEN_30337; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32580 = _GEN_42127 | _GEN_30338; // @[rob.scala 170:{52,52}]
+  wire  _GEN_32581 = _GEN_42128 | _GEN_30339; // @[rob.scala 170:{52,52}]
   wire  _GEN_32582 = io_i_ex_res_packs_0_valid ? _GEN_30406 : _GEN_30212; // @[rob.scala 166:39]
   wire  _GEN_32583 = io_i_ex_res_packs_0_valid ? _GEN_30407 : _GEN_30213; // @[rob.scala 166:39]
   wire  _GEN_32584 = io_i_ex_res_packs_0_valid ? _GEN_30408 : _GEN_30214; // @[rob.scala 166:39]
@@ -13439,134 +13439,134 @@ module Reorder_Buffer(
   wire  _GEN_34755 = io_i_ex_res_packs_0_valid ? _GEN_32579 : _GEN_30337; // @[rob.scala 166:39]
   wire  _GEN_34756 = io_i_ex_res_packs_0_valid ? _GEN_32580 : _GEN_30338; // @[rob.scala 166:39]
   wire  _GEN_34757 = io_i_ex_res_packs_0_valid ? _GEN_32581 : _GEN_30339; // @[rob.scala 166:39]
-  wire  _GEN_34758 = _GEN_42065 | _GEN_32582; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34759 = _GEN_42066 | _GEN_32583; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34760 = _GEN_42067 | _GEN_32584; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34761 = _GEN_42068 | _GEN_32585; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34762 = _GEN_42069 | _GEN_32586; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34763 = _GEN_42070 | _GEN_32587; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34764 = _GEN_42071 | _GEN_32588; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34765 = _GEN_42072 | _GEN_32589; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34766 = _GEN_42073 | _GEN_32590; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34767 = _GEN_42074 | _GEN_32591; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34768 = _GEN_42075 | _GEN_32592; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34769 = _GEN_42076 | _GEN_32593; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34770 = _GEN_42077 | _GEN_32594; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34771 = _GEN_42078 | _GEN_32595; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34772 = _GEN_42079 | _GEN_32596; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34773 = _GEN_42080 | _GEN_32597; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34774 = _GEN_42081 | _GEN_32598; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34775 = _GEN_42082 | _GEN_32599; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34776 = _GEN_42083 | _GEN_32600; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34777 = _GEN_42084 | _GEN_32601; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34778 = _GEN_42085 | _GEN_32602; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34779 = _GEN_42086 | _GEN_32603; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34780 = _GEN_42087 | _GEN_32604; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34781 = _GEN_42088 | _GEN_32605; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34782 = _GEN_42089 | _GEN_32606; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34783 = _GEN_42090 | _GEN_32607; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34784 = _GEN_42091 | _GEN_32608; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34785 = _GEN_42092 | _GEN_32609; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34786 = _GEN_42093 | _GEN_32610; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34787 = _GEN_42094 | _GEN_32611; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34788 = _GEN_42095 | _GEN_32612; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34789 = _GEN_42096 | _GEN_32613; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34790 = _GEN_42097 | _GEN_32614; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34791 = _GEN_42098 | _GEN_32615; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34792 = _GEN_42099 | _GEN_32616; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34793 = _GEN_42100 | _GEN_32617; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34794 = _GEN_42101 | _GEN_32618; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34795 = _GEN_42102 | _GEN_32619; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34796 = _GEN_42103 | _GEN_32620; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34797 = _GEN_42104 | _GEN_32621; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34798 = _GEN_42105 | _GEN_32622; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34799 = _GEN_42106 | _GEN_32623; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34800 = _GEN_42107 | _GEN_32624; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34801 = _GEN_42108 | _GEN_32625; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34802 = _GEN_42109 | _GEN_32626; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34803 = _GEN_42110 | _GEN_32627; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34804 = _GEN_42111 | _GEN_32628; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34805 = _GEN_42112 | _GEN_32629; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34806 = _GEN_42113 | _GEN_32630; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34807 = _GEN_42114 | _GEN_32631; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34808 = _GEN_42115 | _GEN_32632; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34809 = _GEN_42116 | _GEN_32633; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34810 = _GEN_42117 | _GEN_32634; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34811 = _GEN_42118 | _GEN_32635; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34812 = _GEN_42119 | _GEN_32636; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34813 = _GEN_42120 | _GEN_32637; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34814 = _GEN_42121 | _GEN_32638; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34815 = _GEN_42122 | _GEN_32639; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34816 = _GEN_42123 | _GEN_32640; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34817 = _GEN_42124 | _GEN_32641; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34818 = _GEN_42125 | _GEN_32642; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34819 = _GEN_42126 | _GEN_32643; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34820 = _GEN_42127 | _GEN_32644; // @[rob.scala 173:{53,53}]
-  wire  _GEN_34821 = _GEN_42128 | _GEN_32645; // @[rob.scala 173:{53,53}]
-  wire  _GEN_36870 = _GEN_42065 | _GEN_34694; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36871 = _GEN_42066 | _GEN_34695; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36872 = _GEN_42067 | _GEN_34696; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36873 = _GEN_42068 | _GEN_34697; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36874 = _GEN_42069 | _GEN_34698; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36875 = _GEN_42070 | _GEN_34699; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36876 = _GEN_42071 | _GEN_34700; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36877 = _GEN_42072 | _GEN_34701; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36878 = _GEN_42073 | _GEN_34702; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36879 = _GEN_42074 | _GEN_34703; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36880 = _GEN_42075 | _GEN_34704; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36881 = _GEN_42076 | _GEN_34705; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36882 = _GEN_42077 | _GEN_34706; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36883 = _GEN_42078 | _GEN_34707; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36884 = _GEN_42079 | _GEN_34708; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36885 = _GEN_42080 | _GEN_34709; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36886 = _GEN_42081 | _GEN_34710; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36887 = _GEN_42082 | _GEN_34711; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36888 = _GEN_42083 | _GEN_34712; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36889 = _GEN_42084 | _GEN_34713; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36890 = _GEN_42085 | _GEN_34714; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36891 = _GEN_42086 | _GEN_34715; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36892 = _GEN_42087 | _GEN_34716; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36893 = _GEN_42088 | _GEN_34717; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36894 = _GEN_42089 | _GEN_34718; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36895 = _GEN_42090 | _GEN_34719; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36896 = _GEN_42091 | _GEN_34720; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36897 = _GEN_42092 | _GEN_34721; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36898 = _GEN_42093 | _GEN_34722; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36899 = _GEN_42094 | _GEN_34723; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36900 = _GEN_42095 | _GEN_34724; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36901 = _GEN_42096 | _GEN_34725; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36902 = _GEN_42097 | _GEN_34726; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36903 = _GEN_42098 | _GEN_34727; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36904 = _GEN_42099 | _GEN_34728; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36905 = _GEN_42100 | _GEN_34729; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36906 = _GEN_42101 | _GEN_34730; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36907 = _GEN_42102 | _GEN_34731; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36908 = _GEN_42103 | _GEN_34732; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36909 = _GEN_42104 | _GEN_34733; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36910 = _GEN_42105 | _GEN_34734; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36911 = _GEN_42106 | _GEN_34735; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36912 = _GEN_42107 | _GEN_34736; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36913 = _GEN_42108 | _GEN_34737; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36914 = _GEN_42109 | _GEN_34738; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36915 = _GEN_42110 | _GEN_34739; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36916 = _GEN_42111 | _GEN_34740; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36917 = _GEN_42112 | _GEN_34741; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36918 = _GEN_42113 | _GEN_34742; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36919 = _GEN_42114 | _GEN_34743; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36920 = _GEN_42115 | _GEN_34744; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36921 = _GEN_42116 | _GEN_34745; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36922 = _GEN_42117 | _GEN_34746; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36923 = _GEN_42118 | _GEN_34747; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36924 = _GEN_42119 | _GEN_34748; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36925 = _GEN_42120 | _GEN_34749; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36926 = _GEN_42121 | _GEN_34750; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36927 = _GEN_42122 | _GEN_34751; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36928 = _GEN_42123 | _GEN_34752; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36929 = _GEN_42124 | _GEN_34753; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36930 = _GEN_42125 | _GEN_34754; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36931 = _GEN_42126 | _GEN_34755; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36932 = _GEN_42127 | _GEN_34756; // @[rob.scala 176:{52,52}]
-  wire  _GEN_36933 = _GEN_42128 | _GEN_34757; // @[rob.scala 176:{52,52}]
+  wire  _GEN_34758 = _GEN_42193 | _GEN_32582; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34759 = _GEN_42194 | _GEN_32583; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34760 = _GEN_42195 | _GEN_32584; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34761 = _GEN_42196 | _GEN_32585; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34762 = _GEN_42197 | _GEN_32586; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34763 = _GEN_42198 | _GEN_32587; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34764 = _GEN_42199 | _GEN_32588; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34765 = _GEN_42200 | _GEN_32589; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34766 = _GEN_42201 | _GEN_32590; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34767 = _GEN_42202 | _GEN_32591; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34768 = _GEN_42203 | _GEN_32592; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34769 = _GEN_42204 | _GEN_32593; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34770 = _GEN_42205 | _GEN_32594; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34771 = _GEN_42206 | _GEN_32595; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34772 = _GEN_42207 | _GEN_32596; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34773 = _GEN_42208 | _GEN_32597; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34774 = _GEN_42209 | _GEN_32598; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34775 = _GEN_42210 | _GEN_32599; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34776 = _GEN_42211 | _GEN_32600; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34777 = _GEN_42212 | _GEN_32601; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34778 = _GEN_42213 | _GEN_32602; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34779 = _GEN_42214 | _GEN_32603; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34780 = _GEN_42215 | _GEN_32604; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34781 = _GEN_42216 | _GEN_32605; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34782 = _GEN_42217 | _GEN_32606; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34783 = _GEN_42218 | _GEN_32607; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34784 = _GEN_42219 | _GEN_32608; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34785 = _GEN_42220 | _GEN_32609; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34786 = _GEN_42221 | _GEN_32610; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34787 = _GEN_42222 | _GEN_32611; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34788 = _GEN_42223 | _GEN_32612; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34789 = _GEN_42224 | _GEN_32613; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34790 = _GEN_42225 | _GEN_32614; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34791 = _GEN_42226 | _GEN_32615; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34792 = _GEN_42227 | _GEN_32616; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34793 = _GEN_42228 | _GEN_32617; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34794 = _GEN_42229 | _GEN_32618; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34795 = _GEN_42230 | _GEN_32619; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34796 = _GEN_42231 | _GEN_32620; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34797 = _GEN_42232 | _GEN_32621; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34798 = _GEN_42233 | _GEN_32622; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34799 = _GEN_42234 | _GEN_32623; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34800 = _GEN_42235 | _GEN_32624; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34801 = _GEN_42236 | _GEN_32625; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34802 = _GEN_42237 | _GEN_32626; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34803 = _GEN_42238 | _GEN_32627; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34804 = _GEN_42239 | _GEN_32628; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34805 = _GEN_42240 | _GEN_32629; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34806 = _GEN_42241 | _GEN_32630; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34807 = _GEN_42242 | _GEN_32631; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34808 = _GEN_42243 | _GEN_32632; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34809 = _GEN_42244 | _GEN_32633; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34810 = _GEN_42245 | _GEN_32634; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34811 = _GEN_42246 | _GEN_32635; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34812 = _GEN_42247 | _GEN_32636; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34813 = _GEN_42248 | _GEN_32637; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34814 = _GEN_42249 | _GEN_32638; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34815 = _GEN_42250 | _GEN_32639; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34816 = _GEN_42251 | _GEN_32640; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34817 = _GEN_42252 | _GEN_32641; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34818 = _GEN_42253 | _GEN_32642; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34819 = _GEN_42254 | _GEN_32643; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34820 = _GEN_42255 | _GEN_32644; // @[rob.scala 173:{53,53}]
+  wire  _GEN_34821 = _GEN_42256 | _GEN_32645; // @[rob.scala 173:{53,53}]
+  wire  _GEN_36870 = _GEN_42193 | _GEN_34694; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36871 = _GEN_42194 | _GEN_34695; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36872 = _GEN_42195 | _GEN_34696; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36873 = _GEN_42196 | _GEN_34697; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36874 = _GEN_42197 | _GEN_34698; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36875 = _GEN_42198 | _GEN_34699; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36876 = _GEN_42199 | _GEN_34700; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36877 = _GEN_42200 | _GEN_34701; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36878 = _GEN_42201 | _GEN_34702; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36879 = _GEN_42202 | _GEN_34703; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36880 = _GEN_42203 | _GEN_34704; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36881 = _GEN_42204 | _GEN_34705; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36882 = _GEN_42205 | _GEN_34706; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36883 = _GEN_42206 | _GEN_34707; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36884 = _GEN_42207 | _GEN_34708; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36885 = _GEN_42208 | _GEN_34709; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36886 = _GEN_42209 | _GEN_34710; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36887 = _GEN_42210 | _GEN_34711; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36888 = _GEN_42211 | _GEN_34712; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36889 = _GEN_42212 | _GEN_34713; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36890 = _GEN_42213 | _GEN_34714; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36891 = _GEN_42214 | _GEN_34715; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36892 = _GEN_42215 | _GEN_34716; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36893 = _GEN_42216 | _GEN_34717; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36894 = _GEN_42217 | _GEN_34718; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36895 = _GEN_42218 | _GEN_34719; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36896 = _GEN_42219 | _GEN_34720; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36897 = _GEN_42220 | _GEN_34721; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36898 = _GEN_42221 | _GEN_34722; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36899 = _GEN_42222 | _GEN_34723; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36900 = _GEN_42223 | _GEN_34724; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36901 = _GEN_42224 | _GEN_34725; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36902 = _GEN_42225 | _GEN_34726; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36903 = _GEN_42226 | _GEN_34727; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36904 = _GEN_42227 | _GEN_34728; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36905 = _GEN_42228 | _GEN_34729; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36906 = _GEN_42229 | _GEN_34730; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36907 = _GEN_42230 | _GEN_34731; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36908 = _GEN_42231 | _GEN_34732; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36909 = _GEN_42232 | _GEN_34733; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36910 = _GEN_42233 | _GEN_34734; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36911 = _GEN_42234 | _GEN_34735; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36912 = _GEN_42235 | _GEN_34736; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36913 = _GEN_42236 | _GEN_34737; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36914 = _GEN_42237 | _GEN_34738; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36915 = _GEN_42238 | _GEN_34739; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36916 = _GEN_42239 | _GEN_34740; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36917 = _GEN_42240 | _GEN_34741; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36918 = _GEN_42241 | _GEN_34742; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36919 = _GEN_42242 | _GEN_34743; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36920 = _GEN_42243 | _GEN_34744; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36921 = _GEN_42244 | _GEN_34745; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36922 = _GEN_42245 | _GEN_34746; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36923 = _GEN_42246 | _GEN_34747; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36924 = _GEN_42247 | _GEN_34748; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36925 = _GEN_42248 | _GEN_34749; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36926 = _GEN_42249 | _GEN_34750; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36927 = _GEN_42250 | _GEN_34751; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36928 = _GEN_42251 | _GEN_34752; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36929 = _GEN_42252 | _GEN_34753; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36930 = _GEN_42253 | _GEN_34754; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36931 = _GEN_42254 | _GEN_34755; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36932 = _GEN_42255 | _GEN_34756; // @[rob.scala 176:{52,52}]
+  wire  _GEN_36933 = _GEN_42256 | _GEN_34757; // @[rob.scala 176:{52,52}]
   wire  _GEN_36934 = io_i_ex_res_packs_1_valid ? _GEN_34758 : _GEN_32582; // @[rob.scala 172:39]
   wire  _GEN_36935 = io_i_ex_res_packs_1_valid ? _GEN_34759 : _GEN_32583; // @[rob.scala 172:39]
   wire  _GEN_36936 = io_i_ex_res_packs_1_valid ? _GEN_34760 : _GEN_32584; // @[rob.scala 172:39]
@@ -13824,8 +13824,136 @@ module Reorder_Buffer(
   wire  _GEN_39364 = next_will_commit_0 ? _GEN_39172 : _GEN_36996; // @[rob.scala 183:38]
   wire  _GEN_39365 = next_will_commit_0 ? _GEN_39173 : _GEN_36997; // @[rob.scala 183:38]
   wire [6:0] _GEN_39366 = next_will_commit_0 ? _next_can_commit_1_T_1 : _GEN_30405; // @[rob.scala 183:38 185:20]
+  wire  _GEN_39367 = _T_26 ? _GEN_39174 : _GEN_39302; // @[rob.scala 179:55]
+  wire  _GEN_39368 = _T_26 ? _GEN_39175 : _GEN_39303; // @[rob.scala 179:55]
+  wire  _GEN_39369 = _T_26 ? _GEN_39176 : _GEN_39304; // @[rob.scala 179:55]
+  wire  _GEN_39370 = _T_26 ? _GEN_39177 : _GEN_39305; // @[rob.scala 179:55]
+  wire  _GEN_39371 = _T_26 ? _GEN_39178 : _GEN_39306; // @[rob.scala 179:55]
+  wire  _GEN_39372 = _T_26 ? _GEN_39179 : _GEN_39307; // @[rob.scala 179:55]
+  wire  _GEN_39373 = _T_26 ? _GEN_39180 : _GEN_39308; // @[rob.scala 179:55]
+  wire  _GEN_39374 = _T_26 ? _GEN_39181 : _GEN_39309; // @[rob.scala 179:55]
+  wire  _GEN_39375 = _T_26 ? _GEN_39182 : _GEN_39310; // @[rob.scala 179:55]
+  wire  _GEN_39376 = _T_26 ? _GEN_39183 : _GEN_39311; // @[rob.scala 179:55]
+  wire  _GEN_39377 = _T_26 ? _GEN_39184 : _GEN_39312; // @[rob.scala 179:55]
+  wire  _GEN_39378 = _T_26 ? _GEN_39185 : _GEN_39313; // @[rob.scala 179:55]
+  wire  _GEN_39379 = _T_26 ? _GEN_39186 : _GEN_39314; // @[rob.scala 179:55]
+  wire  _GEN_39380 = _T_26 ? _GEN_39187 : _GEN_39315; // @[rob.scala 179:55]
+  wire  _GEN_39381 = _T_26 ? _GEN_39188 : _GEN_39316; // @[rob.scala 179:55]
+  wire  _GEN_39382 = _T_26 ? _GEN_39189 : _GEN_39317; // @[rob.scala 179:55]
+  wire  _GEN_39383 = _T_26 ? _GEN_39190 : _GEN_39318; // @[rob.scala 179:55]
+  wire  _GEN_39384 = _T_26 ? _GEN_39191 : _GEN_39319; // @[rob.scala 179:55]
+  wire  _GEN_39385 = _T_26 ? _GEN_39192 : _GEN_39320; // @[rob.scala 179:55]
+  wire  _GEN_39386 = _T_26 ? _GEN_39193 : _GEN_39321; // @[rob.scala 179:55]
+  wire  _GEN_39387 = _T_26 ? _GEN_39194 : _GEN_39322; // @[rob.scala 179:55]
+  wire  _GEN_39388 = _T_26 ? _GEN_39195 : _GEN_39323; // @[rob.scala 179:55]
+  wire  _GEN_39389 = _T_26 ? _GEN_39196 : _GEN_39324; // @[rob.scala 179:55]
+  wire  _GEN_39390 = _T_26 ? _GEN_39197 : _GEN_39325; // @[rob.scala 179:55]
+  wire  _GEN_39391 = _T_26 ? _GEN_39198 : _GEN_39326; // @[rob.scala 179:55]
+  wire  _GEN_39392 = _T_26 ? _GEN_39199 : _GEN_39327; // @[rob.scala 179:55]
+  wire  _GEN_39393 = _T_26 ? _GEN_39200 : _GEN_39328; // @[rob.scala 179:55]
+  wire  _GEN_39394 = _T_26 ? _GEN_39201 : _GEN_39329; // @[rob.scala 179:55]
+  wire  _GEN_39395 = _T_26 ? _GEN_39202 : _GEN_39330; // @[rob.scala 179:55]
+  wire  _GEN_39396 = _T_26 ? _GEN_39203 : _GEN_39331; // @[rob.scala 179:55]
+  wire  _GEN_39397 = _T_26 ? _GEN_39204 : _GEN_39332; // @[rob.scala 179:55]
+  wire  _GEN_39398 = _T_26 ? _GEN_39205 : _GEN_39333; // @[rob.scala 179:55]
+  wire  _GEN_39399 = _T_26 ? _GEN_39206 : _GEN_39334; // @[rob.scala 179:55]
+  wire  _GEN_39400 = _T_26 ? _GEN_39207 : _GEN_39335; // @[rob.scala 179:55]
+  wire  _GEN_39401 = _T_26 ? _GEN_39208 : _GEN_39336; // @[rob.scala 179:55]
+  wire  _GEN_39402 = _T_26 ? _GEN_39209 : _GEN_39337; // @[rob.scala 179:55]
+  wire  _GEN_39403 = _T_26 ? _GEN_39210 : _GEN_39338; // @[rob.scala 179:55]
+  wire  _GEN_39404 = _T_26 ? _GEN_39211 : _GEN_39339; // @[rob.scala 179:55]
+  wire  _GEN_39405 = _T_26 ? _GEN_39212 : _GEN_39340; // @[rob.scala 179:55]
+  wire  _GEN_39406 = _T_26 ? _GEN_39213 : _GEN_39341; // @[rob.scala 179:55]
+  wire  _GEN_39407 = _T_26 ? _GEN_39214 : _GEN_39342; // @[rob.scala 179:55]
+  wire  _GEN_39408 = _T_26 ? _GEN_39215 : _GEN_39343; // @[rob.scala 179:55]
+  wire  _GEN_39409 = _T_26 ? _GEN_39216 : _GEN_39344; // @[rob.scala 179:55]
+  wire  _GEN_39410 = _T_26 ? _GEN_39217 : _GEN_39345; // @[rob.scala 179:55]
+  wire  _GEN_39411 = _T_26 ? _GEN_39218 : _GEN_39346; // @[rob.scala 179:55]
+  wire  _GEN_39412 = _T_26 ? _GEN_39219 : _GEN_39347; // @[rob.scala 179:55]
+  wire  _GEN_39413 = _T_26 ? _GEN_39220 : _GEN_39348; // @[rob.scala 179:55]
+  wire  _GEN_39414 = _T_26 ? _GEN_39221 : _GEN_39349; // @[rob.scala 179:55]
+  wire  _GEN_39415 = _T_26 ? _GEN_39222 : _GEN_39350; // @[rob.scala 179:55]
+  wire  _GEN_39416 = _T_26 ? _GEN_39223 : _GEN_39351; // @[rob.scala 179:55]
+  wire  _GEN_39417 = _T_26 ? _GEN_39224 : _GEN_39352; // @[rob.scala 179:55]
+  wire  _GEN_39418 = _T_26 ? _GEN_39225 : _GEN_39353; // @[rob.scala 179:55]
+  wire  _GEN_39419 = _T_26 ? _GEN_39226 : _GEN_39354; // @[rob.scala 179:55]
+  wire  _GEN_39420 = _T_26 ? _GEN_39227 : _GEN_39355; // @[rob.scala 179:55]
+  wire  _GEN_39421 = _T_26 ? _GEN_39228 : _GEN_39356; // @[rob.scala 179:55]
+  wire  _GEN_39422 = _T_26 ? _GEN_39229 : _GEN_39357; // @[rob.scala 179:55]
+  wire  _GEN_39423 = _T_26 ? _GEN_39230 : _GEN_39358; // @[rob.scala 179:55]
+  wire  _GEN_39424 = _T_26 ? _GEN_39231 : _GEN_39359; // @[rob.scala 179:55]
+  wire  _GEN_39425 = _T_26 ? _GEN_39232 : _GEN_39360; // @[rob.scala 179:55]
+  wire  _GEN_39426 = _T_26 ? _GEN_39233 : _GEN_39361; // @[rob.scala 179:55]
+  wire  _GEN_39427 = _T_26 ? _GEN_39234 : _GEN_39362; // @[rob.scala 179:55]
+  wire  _GEN_39428 = _T_26 ? _GEN_39235 : _GEN_39363; // @[rob.scala 179:55]
+  wire  _GEN_39429 = _T_26 ? _GEN_39236 : _GEN_39364; // @[rob.scala 179:55]
+  wire  _GEN_39430 = _T_26 ? _GEN_39237 : _GEN_39365; // @[rob.scala 179:55]
+  wire  _GEN_39432 = _next_will_commit_0_T_6 ? _GEN_39367 : _GEN_30212; // @[rob.scala 164:36]
+  wire  _GEN_39433 = _next_will_commit_0_T_6 ? _GEN_39368 : _GEN_30213; // @[rob.scala 164:36]
+  wire  _GEN_39434 = _next_will_commit_0_T_6 ? _GEN_39369 : _GEN_30214; // @[rob.scala 164:36]
+  wire  _GEN_39435 = _next_will_commit_0_T_6 ? _GEN_39370 : _GEN_30215; // @[rob.scala 164:36]
+  wire  _GEN_39436 = _next_will_commit_0_T_6 ? _GEN_39371 : _GEN_30216; // @[rob.scala 164:36]
+  wire  _GEN_39437 = _next_will_commit_0_T_6 ? _GEN_39372 : _GEN_30217; // @[rob.scala 164:36]
+  wire  _GEN_39438 = _next_will_commit_0_T_6 ? _GEN_39373 : _GEN_30218; // @[rob.scala 164:36]
+  wire  _GEN_39439 = _next_will_commit_0_T_6 ? _GEN_39374 : _GEN_30219; // @[rob.scala 164:36]
+  wire  _GEN_39440 = _next_will_commit_0_T_6 ? _GEN_39375 : _GEN_30220; // @[rob.scala 164:36]
+  wire  _GEN_39441 = _next_will_commit_0_T_6 ? _GEN_39376 : _GEN_30221; // @[rob.scala 164:36]
+  wire  _GEN_39442 = _next_will_commit_0_T_6 ? _GEN_39377 : _GEN_30222; // @[rob.scala 164:36]
+  wire  _GEN_39443 = _next_will_commit_0_T_6 ? _GEN_39378 : _GEN_30223; // @[rob.scala 164:36]
+  wire  _GEN_39444 = _next_will_commit_0_T_6 ? _GEN_39379 : _GEN_30224; // @[rob.scala 164:36]
+  wire  _GEN_39445 = _next_will_commit_0_T_6 ? _GEN_39380 : _GEN_30225; // @[rob.scala 164:36]
+  wire  _GEN_39446 = _next_will_commit_0_T_6 ? _GEN_39381 : _GEN_30226; // @[rob.scala 164:36]
+  wire  _GEN_39447 = _next_will_commit_0_T_6 ? _GEN_39382 : _GEN_30227; // @[rob.scala 164:36]
+  wire  _GEN_39448 = _next_will_commit_0_T_6 ? _GEN_39383 : _GEN_30228; // @[rob.scala 164:36]
+  wire  _GEN_39449 = _next_will_commit_0_T_6 ? _GEN_39384 : _GEN_30229; // @[rob.scala 164:36]
+  wire  _GEN_39450 = _next_will_commit_0_T_6 ? _GEN_39385 : _GEN_30230; // @[rob.scala 164:36]
+  wire  _GEN_39451 = _next_will_commit_0_T_6 ? _GEN_39386 : _GEN_30231; // @[rob.scala 164:36]
+  wire  _GEN_39452 = _next_will_commit_0_T_6 ? _GEN_39387 : _GEN_30232; // @[rob.scala 164:36]
+  wire  _GEN_39453 = _next_will_commit_0_T_6 ? _GEN_39388 : _GEN_30233; // @[rob.scala 164:36]
+  wire  _GEN_39454 = _next_will_commit_0_T_6 ? _GEN_39389 : _GEN_30234; // @[rob.scala 164:36]
+  wire  _GEN_39455 = _next_will_commit_0_T_6 ? _GEN_39390 : _GEN_30235; // @[rob.scala 164:36]
+  wire  _GEN_39456 = _next_will_commit_0_T_6 ? _GEN_39391 : _GEN_30236; // @[rob.scala 164:36]
+  wire  _GEN_39457 = _next_will_commit_0_T_6 ? _GEN_39392 : _GEN_30237; // @[rob.scala 164:36]
+  wire  _GEN_39458 = _next_will_commit_0_T_6 ? _GEN_39393 : _GEN_30238; // @[rob.scala 164:36]
+  wire  _GEN_39459 = _next_will_commit_0_T_6 ? _GEN_39394 : _GEN_30239; // @[rob.scala 164:36]
+  wire  _GEN_39460 = _next_will_commit_0_T_6 ? _GEN_39395 : _GEN_30240; // @[rob.scala 164:36]
+  wire  _GEN_39461 = _next_will_commit_0_T_6 ? _GEN_39396 : _GEN_30241; // @[rob.scala 164:36]
+  wire  _GEN_39462 = _next_will_commit_0_T_6 ? _GEN_39397 : _GEN_30242; // @[rob.scala 164:36]
+  wire  _GEN_39463 = _next_will_commit_0_T_6 ? _GEN_39398 : _GEN_30243; // @[rob.scala 164:36]
+  wire  _GEN_39464 = _next_will_commit_0_T_6 ? _GEN_39399 : _GEN_30244; // @[rob.scala 164:36]
+  wire  _GEN_39465 = _next_will_commit_0_T_6 ? _GEN_39400 : _GEN_30245; // @[rob.scala 164:36]
+  wire  _GEN_39466 = _next_will_commit_0_T_6 ? _GEN_39401 : _GEN_30246; // @[rob.scala 164:36]
+  wire  _GEN_39467 = _next_will_commit_0_T_6 ? _GEN_39402 : _GEN_30247; // @[rob.scala 164:36]
+  wire  _GEN_39468 = _next_will_commit_0_T_6 ? _GEN_39403 : _GEN_30248; // @[rob.scala 164:36]
+  wire  _GEN_39469 = _next_will_commit_0_T_6 ? _GEN_39404 : _GEN_30249; // @[rob.scala 164:36]
+  wire  _GEN_39470 = _next_will_commit_0_T_6 ? _GEN_39405 : _GEN_30250; // @[rob.scala 164:36]
+  wire  _GEN_39471 = _next_will_commit_0_T_6 ? _GEN_39406 : _GEN_30251; // @[rob.scala 164:36]
+  wire  _GEN_39472 = _next_will_commit_0_T_6 ? _GEN_39407 : _GEN_30252; // @[rob.scala 164:36]
+  wire  _GEN_39473 = _next_will_commit_0_T_6 ? _GEN_39408 : _GEN_30253; // @[rob.scala 164:36]
+  wire  _GEN_39474 = _next_will_commit_0_T_6 ? _GEN_39409 : _GEN_30254; // @[rob.scala 164:36]
+  wire  _GEN_39475 = _next_will_commit_0_T_6 ? _GEN_39410 : _GEN_30255; // @[rob.scala 164:36]
+  wire  _GEN_39476 = _next_will_commit_0_T_6 ? _GEN_39411 : _GEN_30256; // @[rob.scala 164:36]
+  wire  _GEN_39477 = _next_will_commit_0_T_6 ? _GEN_39412 : _GEN_30257; // @[rob.scala 164:36]
+  wire  _GEN_39478 = _next_will_commit_0_T_6 ? _GEN_39413 : _GEN_30258; // @[rob.scala 164:36]
+  wire  _GEN_39479 = _next_will_commit_0_T_6 ? _GEN_39414 : _GEN_30259; // @[rob.scala 164:36]
+  wire  _GEN_39480 = _next_will_commit_0_T_6 ? _GEN_39415 : _GEN_30260; // @[rob.scala 164:36]
+  wire  _GEN_39481 = _next_will_commit_0_T_6 ? _GEN_39416 : _GEN_30261; // @[rob.scala 164:36]
+  wire  _GEN_39482 = _next_will_commit_0_T_6 ? _GEN_39417 : _GEN_30262; // @[rob.scala 164:36]
+  wire  _GEN_39483 = _next_will_commit_0_T_6 ? _GEN_39418 : _GEN_30263; // @[rob.scala 164:36]
+  wire  _GEN_39484 = _next_will_commit_0_T_6 ? _GEN_39419 : _GEN_30264; // @[rob.scala 164:36]
+  wire  _GEN_39485 = _next_will_commit_0_T_6 ? _GEN_39420 : _GEN_30265; // @[rob.scala 164:36]
+  wire  _GEN_39486 = _next_will_commit_0_T_6 ? _GEN_39421 : _GEN_30266; // @[rob.scala 164:36]
+  wire  _GEN_39487 = _next_will_commit_0_T_6 ? _GEN_39422 : _GEN_30267; // @[rob.scala 164:36]
+  wire  _GEN_39488 = _next_will_commit_0_T_6 ? _GEN_39423 : _GEN_30268; // @[rob.scala 164:36]
+  wire  _GEN_39489 = _next_will_commit_0_T_6 ? _GEN_39424 : _GEN_30269; // @[rob.scala 164:36]
+  wire  _GEN_39490 = _next_will_commit_0_T_6 ? _GEN_39425 : _GEN_30270; // @[rob.scala 164:36]
+  wire  _GEN_39491 = _next_will_commit_0_T_6 ? _GEN_39426 : _GEN_30271; // @[rob.scala 164:36]
+  wire  _GEN_39492 = _next_will_commit_0_T_6 ? _GEN_39427 : _GEN_30272; // @[rob.scala 164:36]
+  wire  _GEN_39493 = _next_will_commit_0_T_6 ? _GEN_39428 : _GEN_30273; // @[rob.scala 164:36]
+  wire  _GEN_39494 = _next_will_commit_0_T_6 ? _GEN_39429 : _GEN_30274; // @[rob.scala 164:36]
+  wire  _GEN_39495 = _next_will_commit_0_T_6 ? _GEN_39430 : _GEN_30275; // @[rob.scala 164:36]
   wire [6:0] _allocate_ptr_T_5 = allocate_ptr - this_num_to_roll_back; // @[rob.scala 190:36]
-  assign io_o_full = _is_full_T_1 == commit_ptr | _is_full_T_4 == commit_ptr; // @[rob.scala 207:52]
+  assign io_o_full = _is_full_T_1 == commit_ptr | _is_full_T_4 == commit_ptr; // @[rob.scala 208:52]
   assign io_o_rob_allocation_ress_0_rob_idx = allocate_ptr; // @[rob.scala 120:43]
   assign io_o_rob_allocation_ress_1_rob_idx = allocate_ptr + 7'h1; // @[rob.scala 121:58]
   assign io_o_rollback_packs_0_valid = next_rob_state == 2'h2; // @[rob.scala 114:53]
@@ -13856,12 +13984,12 @@ module Reorder_Buffer(
   assign io_o_commit_packs_1_uop_src1_value = 6'h3f == _next_can_commit_1_T_1[5:0] ? rob_uop_63_src1_value : _GEN_4222; // @[rob.scala 109:{32,32}]
   assign io_o_commit_packs_1_uop_alu_sel = 6'h3f == _next_can_commit_1_T_1[5:0] ? rob_uop_63_alu_sel : _GEN_4542; // @[rob.scala 109:{32,32}]
   assign io_o_rob_head = commit_ptr; // @[rob.scala 78:19]
-  assign io_o_exception = 1'h0; // @[rob.scala 204:{47,47}]
+  assign io_o_exception = 1'h0; // @[rob.scala 205:{47,47}]
   always @(posedge clock) begin
     if (reset) begin // @[rob.scala 46:29]
       commit_ptr <= 7'h0; // @[rob.scala 46:29]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      commit_ptr <= 7'h0; // @[rob.scala 197:20]
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      commit_ptr <= 7'h0; // @[rob.scala 198:20]
     end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
       if (_T_26) begin // @[rob.scala 179:55]
         commit_ptr <= _commit_ptr_T_1; // @[rob.scala 182:20]
@@ -13873,8 +14001,8 @@ module Reorder_Buffer(
     end
     if (reset) begin // @[rob.scala 47:31]
       allocate_ptr <= 7'h0; // @[rob.scala 47:31]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      allocate_ptr <= 7'h0; // @[rob.scala 196:22]
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      allocate_ptr <= 7'h0; // @[rob.scala 197:22]
     end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
       allocate_ptr <= _allocate_ptr_T_5; // @[rob.scala 190:20]
     end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
@@ -13882,7 +14010,7 @@ module Reorder_Buffer(
     end
     if (reset) begin // @[rob.scala 53:28]
       rob_state <= 2'h1; // @[rob.scala 53:28]
-    end else if (io_o_exception | io_i_interrupt | last_pc_redirect) begin // @[rob.scala 213:24]
+    end else if (io_o_exception | io_i_interrupt | last_pc_redirect) begin // @[rob.scala 214:24]
       rob_state <= 2'h0;
     end else if (_next_rob_state_T_2) begin // @[Mux.scala 101:16]
       rob_state <= 2'h1;
@@ -13899,835 +14027,835 @@ module Reorder_Buffer(
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_0 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_0 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_0 <= _GEN_39174;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_0 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h0 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_0 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_0 <= _GEN_39302;
+        rob_valid_0 <= _GEN_39432;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_0 <= _GEN_28163;
+    end else begin
+      rob_valid_0 <= _GEN_39432;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_1 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_1 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_1 <= _GEN_39175;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_1 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h1 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_1 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_1 <= _GEN_39303;
+        rob_valid_1 <= _GEN_39433;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_1 <= _GEN_28164;
+    end else begin
+      rob_valid_1 <= _GEN_39433;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_2 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_2 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_2 <= _GEN_39176;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_2 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h2 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_2 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_2 <= _GEN_39304;
+        rob_valid_2 <= _GEN_39434;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_2 <= _GEN_28165;
+    end else begin
+      rob_valid_2 <= _GEN_39434;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_3 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_3 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_3 <= _GEN_39177;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_3 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h3 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_3 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_3 <= _GEN_39305;
+        rob_valid_3 <= _GEN_39435;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_3 <= _GEN_28166;
+    end else begin
+      rob_valid_3 <= _GEN_39435;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_4 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_4 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_4 <= _GEN_39178;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_4 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h4 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_4 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_4 <= _GEN_39306;
+        rob_valid_4 <= _GEN_39436;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_4 <= _GEN_28167;
+    end else begin
+      rob_valid_4 <= _GEN_39436;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_5 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_5 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_5 <= _GEN_39179;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_5 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h5 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_5 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_5 <= _GEN_39307;
+        rob_valid_5 <= _GEN_39437;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_5 <= _GEN_28168;
+    end else begin
+      rob_valid_5 <= _GEN_39437;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_6 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_6 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_6 <= _GEN_39180;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_6 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h6 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_6 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_6 <= _GEN_39308;
+        rob_valid_6 <= _GEN_39438;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_6 <= _GEN_28169;
+    end else begin
+      rob_valid_6 <= _GEN_39438;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_7 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_7 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_7 <= _GEN_39181;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_7 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h7 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_7 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_7 <= _GEN_39309;
+        rob_valid_7 <= _GEN_39439;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_7 <= _GEN_28170;
+    end else begin
+      rob_valid_7 <= _GEN_39439;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_8 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_8 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_8 <= _GEN_39182;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_8 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h8 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_8 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_8 <= _GEN_39310;
+        rob_valid_8 <= _GEN_39440;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_8 <= _GEN_28171;
+    end else begin
+      rob_valid_8 <= _GEN_39440;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_9 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_9 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_9 <= _GEN_39183;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_9 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h9 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_9 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_9 <= _GEN_39311;
+        rob_valid_9 <= _GEN_39441;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_9 <= _GEN_28172;
+    end else begin
+      rob_valid_9 <= _GEN_39441;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_10 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_10 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_10 <= _GEN_39184;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_10 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'ha == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_10 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_10 <= _GEN_39312;
+        rob_valid_10 <= _GEN_39442;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_10 <= _GEN_28173;
+    end else begin
+      rob_valid_10 <= _GEN_39442;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_11 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_11 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_11 <= _GEN_39185;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_11 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'hb == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_11 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_11 <= _GEN_39313;
+        rob_valid_11 <= _GEN_39443;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_11 <= _GEN_28174;
+    end else begin
+      rob_valid_11 <= _GEN_39443;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_12 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_12 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_12 <= _GEN_39186;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_12 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'hc == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_12 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_12 <= _GEN_39314;
+        rob_valid_12 <= _GEN_39444;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_12 <= _GEN_28175;
+    end else begin
+      rob_valid_12 <= _GEN_39444;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_13 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_13 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_13 <= _GEN_39187;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_13 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'hd == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_13 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_13 <= _GEN_39315;
+        rob_valid_13 <= _GEN_39445;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_13 <= _GEN_28176;
+    end else begin
+      rob_valid_13 <= _GEN_39445;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_14 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_14 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_14 <= _GEN_39188;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_14 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'he == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_14 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_14 <= _GEN_39316;
+        rob_valid_14 <= _GEN_39446;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_14 <= _GEN_28177;
+    end else begin
+      rob_valid_14 <= _GEN_39446;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_15 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_15 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_15 <= _GEN_39189;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_15 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'hf == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_15 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_15 <= _GEN_39317;
+        rob_valid_15 <= _GEN_39447;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_15 <= _GEN_28178;
+    end else begin
+      rob_valid_15 <= _GEN_39447;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_16 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_16 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_16 <= _GEN_39190;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_16 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h10 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_16 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_16 <= _GEN_39318;
+        rob_valid_16 <= _GEN_39448;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_16 <= _GEN_28179;
+    end else begin
+      rob_valid_16 <= _GEN_39448;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_17 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_17 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_17 <= _GEN_39191;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_17 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h11 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_17 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_17 <= _GEN_39319;
+        rob_valid_17 <= _GEN_39449;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_17 <= _GEN_28180;
+    end else begin
+      rob_valid_17 <= _GEN_39449;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_18 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_18 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_18 <= _GEN_39192;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_18 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h12 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_18 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_18 <= _GEN_39320;
+        rob_valid_18 <= _GEN_39450;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_18 <= _GEN_28181;
+    end else begin
+      rob_valid_18 <= _GEN_39450;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_19 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_19 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_19 <= _GEN_39193;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_19 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h13 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_19 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_19 <= _GEN_39321;
+        rob_valid_19 <= _GEN_39451;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_19 <= _GEN_28182;
+    end else begin
+      rob_valid_19 <= _GEN_39451;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_20 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_20 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_20 <= _GEN_39194;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_20 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h14 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_20 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_20 <= _GEN_39322;
+        rob_valid_20 <= _GEN_39452;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_20 <= _GEN_28183;
+    end else begin
+      rob_valid_20 <= _GEN_39452;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_21 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_21 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_21 <= _GEN_39195;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_21 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h15 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_21 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_21 <= _GEN_39323;
+        rob_valid_21 <= _GEN_39453;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_21 <= _GEN_28184;
+    end else begin
+      rob_valid_21 <= _GEN_39453;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_22 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_22 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_22 <= _GEN_39196;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_22 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h16 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_22 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_22 <= _GEN_39324;
+        rob_valid_22 <= _GEN_39454;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_22 <= _GEN_28185;
+    end else begin
+      rob_valid_22 <= _GEN_39454;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_23 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_23 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_23 <= _GEN_39197;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_23 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h17 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_23 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_23 <= _GEN_39325;
+        rob_valid_23 <= _GEN_39455;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_23 <= _GEN_28186;
+    end else begin
+      rob_valid_23 <= _GEN_39455;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_24 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_24 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_24 <= _GEN_39198;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_24 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h18 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_24 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_24 <= _GEN_39326;
+        rob_valid_24 <= _GEN_39456;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_24 <= _GEN_28187;
+    end else begin
+      rob_valid_24 <= _GEN_39456;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_25 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_25 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_25 <= _GEN_39199;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_25 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h19 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_25 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_25 <= _GEN_39327;
+        rob_valid_25 <= _GEN_39457;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_25 <= _GEN_28188;
+    end else begin
+      rob_valid_25 <= _GEN_39457;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_26 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_26 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_26 <= _GEN_39200;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_26 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h1a == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_26 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_26 <= _GEN_39328;
+        rob_valid_26 <= _GEN_39458;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_26 <= _GEN_28189;
+    end else begin
+      rob_valid_26 <= _GEN_39458;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_27 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_27 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_27 <= _GEN_39201;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_27 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h1b == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_27 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_27 <= _GEN_39329;
+        rob_valid_27 <= _GEN_39459;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_27 <= _GEN_28190;
+    end else begin
+      rob_valid_27 <= _GEN_39459;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_28 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_28 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_28 <= _GEN_39202;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_28 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h1c == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_28 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_28 <= _GEN_39330;
+        rob_valid_28 <= _GEN_39460;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_28 <= _GEN_28191;
+    end else begin
+      rob_valid_28 <= _GEN_39460;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_29 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_29 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_29 <= _GEN_39203;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_29 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h1d == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_29 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_29 <= _GEN_39331;
+        rob_valid_29 <= _GEN_39461;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_29 <= _GEN_28192;
+    end else begin
+      rob_valid_29 <= _GEN_39461;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_30 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_30 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_30 <= _GEN_39204;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_30 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h1e == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_30 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_30 <= _GEN_39332;
+        rob_valid_30 <= _GEN_39462;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_30 <= _GEN_28193;
+    end else begin
+      rob_valid_30 <= _GEN_39462;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_31 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_31 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_31 <= _GEN_39205;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_31 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h1f == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_31 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_31 <= _GEN_39333;
+        rob_valid_31 <= _GEN_39463;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_31 <= _GEN_28194;
+    end else begin
+      rob_valid_31 <= _GEN_39463;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_32 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_32 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_32 <= _GEN_39206;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_32 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h20 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_32 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_32 <= _GEN_39334;
+        rob_valid_32 <= _GEN_39464;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_32 <= _GEN_28195;
+    end else begin
+      rob_valid_32 <= _GEN_39464;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_33 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_33 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_33 <= _GEN_39207;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_33 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h21 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_33 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_33 <= _GEN_39335;
+        rob_valid_33 <= _GEN_39465;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_33 <= _GEN_28196;
+    end else begin
+      rob_valid_33 <= _GEN_39465;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_34 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_34 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_34 <= _GEN_39208;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_34 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h22 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_34 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_34 <= _GEN_39336;
+        rob_valid_34 <= _GEN_39466;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_34 <= _GEN_28197;
+    end else begin
+      rob_valid_34 <= _GEN_39466;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_35 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_35 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_35 <= _GEN_39209;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_35 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h23 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_35 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_35 <= _GEN_39337;
+        rob_valid_35 <= _GEN_39467;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_35 <= _GEN_28198;
+    end else begin
+      rob_valid_35 <= _GEN_39467;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_36 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_36 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_36 <= _GEN_39210;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_36 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h24 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_36 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_36 <= _GEN_39338;
+        rob_valid_36 <= _GEN_39468;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_36 <= _GEN_28199;
+    end else begin
+      rob_valid_36 <= _GEN_39468;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_37 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_37 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_37 <= _GEN_39211;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_37 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h25 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_37 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_37 <= _GEN_39339;
+        rob_valid_37 <= _GEN_39469;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_37 <= _GEN_28200;
+    end else begin
+      rob_valid_37 <= _GEN_39469;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_38 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_38 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_38 <= _GEN_39212;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_38 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h26 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_38 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_38 <= _GEN_39340;
+        rob_valid_38 <= _GEN_39470;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_38 <= _GEN_28201;
+    end else begin
+      rob_valid_38 <= _GEN_39470;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_39 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_39 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_39 <= _GEN_39213;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_39 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h27 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_39 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_39 <= _GEN_39341;
+        rob_valid_39 <= _GEN_39471;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_39 <= _GEN_28202;
+    end else begin
+      rob_valid_39 <= _GEN_39471;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_40 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_40 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_40 <= _GEN_39214;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_40 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h28 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_40 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_40 <= _GEN_39342;
+        rob_valid_40 <= _GEN_39472;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_40 <= _GEN_28203;
+    end else begin
+      rob_valid_40 <= _GEN_39472;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_41 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_41 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_41 <= _GEN_39215;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_41 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h29 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_41 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_41 <= _GEN_39343;
+        rob_valid_41 <= _GEN_39473;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_41 <= _GEN_28204;
+    end else begin
+      rob_valid_41 <= _GEN_39473;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_42 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_42 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_42 <= _GEN_39216;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_42 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h2a == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_42 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_42 <= _GEN_39344;
+        rob_valid_42 <= _GEN_39474;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_42 <= _GEN_28205;
+    end else begin
+      rob_valid_42 <= _GEN_39474;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_43 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_43 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_43 <= _GEN_39217;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_43 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h2b == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_43 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_43 <= _GEN_39345;
+        rob_valid_43 <= _GEN_39475;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_43 <= _GEN_28206;
+    end else begin
+      rob_valid_43 <= _GEN_39475;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_44 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_44 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_44 <= _GEN_39218;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_44 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h2c == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_44 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_44 <= _GEN_39346;
+        rob_valid_44 <= _GEN_39476;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_44 <= _GEN_28207;
+    end else begin
+      rob_valid_44 <= _GEN_39476;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_45 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_45 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_45 <= _GEN_39219;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_45 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h2d == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_45 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_45 <= _GEN_39347;
+        rob_valid_45 <= _GEN_39477;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_45 <= _GEN_28208;
+    end else begin
+      rob_valid_45 <= _GEN_39477;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_46 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_46 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_46 <= _GEN_39220;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_46 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h2e == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_46 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_46 <= _GEN_39348;
+        rob_valid_46 <= _GEN_39478;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_46 <= _GEN_28209;
+    end else begin
+      rob_valid_46 <= _GEN_39478;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_47 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_47 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_47 <= _GEN_39221;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_47 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h2f == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_47 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_47 <= _GEN_39349;
+        rob_valid_47 <= _GEN_39479;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_47 <= _GEN_28210;
+    end else begin
+      rob_valid_47 <= _GEN_39479;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_48 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_48 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_48 <= _GEN_39222;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_48 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h30 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_48 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_48 <= _GEN_39350;
+        rob_valid_48 <= _GEN_39480;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_48 <= _GEN_28211;
+    end else begin
+      rob_valid_48 <= _GEN_39480;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_49 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_49 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_49 <= _GEN_39223;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_49 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h31 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_49 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_49 <= _GEN_39351;
+        rob_valid_49 <= _GEN_39481;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_49 <= _GEN_28212;
+    end else begin
+      rob_valid_49 <= _GEN_39481;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_50 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_50 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_50 <= _GEN_39224;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_50 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h32 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_50 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_50 <= _GEN_39352;
+        rob_valid_50 <= _GEN_39482;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_50 <= _GEN_28213;
+    end else begin
+      rob_valid_50 <= _GEN_39482;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_51 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_51 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_51 <= _GEN_39225;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_51 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h33 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_51 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_51 <= _GEN_39353;
+        rob_valid_51 <= _GEN_39483;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_51 <= _GEN_28214;
+    end else begin
+      rob_valid_51 <= _GEN_39483;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_52 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_52 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_52 <= _GEN_39226;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_52 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h34 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_52 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_52 <= _GEN_39354;
+        rob_valid_52 <= _GEN_39484;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_52 <= _GEN_28215;
+    end else begin
+      rob_valid_52 <= _GEN_39484;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_53 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_53 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_53 <= _GEN_39227;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_53 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h35 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_53 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_53 <= _GEN_39355;
+        rob_valid_53 <= _GEN_39485;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_53 <= _GEN_28216;
+    end else begin
+      rob_valid_53 <= _GEN_39485;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_54 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_54 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_54 <= _GEN_39228;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_54 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h36 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_54 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_54 <= _GEN_39356;
+        rob_valid_54 <= _GEN_39486;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_54 <= _GEN_28217;
+    end else begin
+      rob_valid_54 <= _GEN_39486;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_55 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_55 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_55 <= _GEN_39229;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_55 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h37 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_55 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_55 <= _GEN_39357;
+        rob_valid_55 <= _GEN_39487;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_55 <= _GEN_28218;
+    end else begin
+      rob_valid_55 <= _GEN_39487;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_56 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_56 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_56 <= _GEN_39230;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_56 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h38 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_56 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_56 <= _GEN_39358;
+        rob_valid_56 <= _GEN_39488;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_56 <= _GEN_28219;
+    end else begin
+      rob_valid_56 <= _GEN_39488;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_57 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_57 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_57 <= _GEN_39231;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_57 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h39 == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_57 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_57 <= _GEN_39359;
+        rob_valid_57 <= _GEN_39489;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_57 <= _GEN_28220;
+    end else begin
+      rob_valid_57 <= _GEN_39489;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_58 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_58 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_58 <= _GEN_39232;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_58 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h3a == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_58 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_58 <= _GEN_39360;
+        rob_valid_58 <= _GEN_39490;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_58 <= _GEN_28221;
+    end else begin
+      rob_valid_58 <= _GEN_39490;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_59 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_59 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_59 <= _GEN_39233;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_59 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h3b == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_59 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_59 <= _GEN_39361;
+        rob_valid_59 <= _GEN_39491;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_59 <= _GEN_28222;
+    end else begin
+      rob_valid_59 <= _GEN_39491;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_60 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_60 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_60 <= _GEN_39234;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_60 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h3c == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_60 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_60 <= _GEN_39362;
+        rob_valid_60 <= _GEN_39492;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_60 <= _GEN_28223;
+    end else begin
+      rob_valid_60 <= _GEN_39492;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_61 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_61 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_61 <= _GEN_39235;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_61 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h3d == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_61 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_61 <= _GEN_39363;
+        rob_valid_61 <= _GEN_39493;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_61 <= _GEN_28224;
+    end else begin
+      rob_valid_61 <= _GEN_39493;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_62 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_62 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_62 <= _GEN_39236;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_62 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h3e == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_62 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_62 <= _GEN_39364;
+        rob_valid_62 <= _GEN_39494;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_62 <= _GEN_28225;
+    end else begin
+      rob_valid_62 <= _GEN_39494;
     end
     if (reset) begin // @[rob.scala 81:28]
       rob_valid_63 <= 1'h0; // @[rob.scala 81:28]
-    end else if (next_rob_state == 2'h0) begin // @[rob.scala 192:37]
-      rob_valid_63 <= 1'h0; // @[rob.scala 194:24]
-    end else if (_next_will_commit_0_T_6) begin // @[rob.scala 164:36]
-      if (_T_26) begin // @[rob.scala 179:55]
-        rob_valid_63 <= _GEN_39237;
+    end else if (next_rob_state == 2'h0) begin // @[rob.scala 193:37]
+      rob_valid_63 <= 1'h0; // @[rob.scala 195:24]
+    end else if (_this_num_to_roll_back_T) begin // @[rob.scala 188:40]
+      if (6'h3f == allocate_ptr[5:0]) begin // @[rob.scala 191:31]
+        rob_valid_63 <= 1'h0; // @[rob.scala 191:31]
       end else begin
-        rob_valid_63 <= _GEN_39365;
+        rob_valid_63 <= _GEN_39495;
       end
-    end else if (_next_will_commit_0_T_5) begin // @[rob.scala 123:38]
-      rob_valid_63 <= _GEN_28226;
+    end else begin
+      rob_valid_63 <= _GEN_39495;
     end
     if (reset) begin // @[rob.scala 82:26]
       rob_uop_0_pc <= 32'h0; // @[rob.scala 82:26]

@@ -195,6 +195,7 @@ module Execute(
   wire [6:0] bru_io_o_ex_res_pack_uop_stale_dst; // @[execute.scala 49:21]
   wire [4:0] bru_io_o_ex_res_pack_uop_arch_dst; // @[execute.scala 49:21]
   wire [6:0] bru_io_o_ex_res_pack_uop_rob_idx; // @[execute.scala 49:21]
+  wire [63:0] bru_io_o_ex_res_pack_uop_dst_value; // @[execute.scala 49:21]
   wire [63:0] bru_io_o_ex_res_pack_uop_src1_value; // @[execute.scala 49:21]
   wire [4:0] bru_io_o_ex_res_pack_uop_alu_sel; // @[execute.scala 49:21]
   wire  bru_io_o_available; // @[execute.scala 49:21]
@@ -499,8 +500,8 @@ module Execute(
      : _io_o_ex_res_packs_0_uop_T_10_arch_dst; // @[Mux.scala 101:16]
   wire [6:0] _io_o_ex_res_packs_0_uop_T_11_rob_idx = _bru_io_i_select_to_commit_T ? bru_io_o_ex_res_pack_uop_rob_idx :
     _io_o_ex_res_packs_0_uop_T_10_rob_idx; // @[Mux.scala 101:16]
-  wire [63:0] _io_o_ex_res_packs_0_uop_T_11_dst_value = _bru_io_i_select_to_commit_T ? 64'h0 :
-    _io_o_ex_res_packs_0_uop_T_10_dst_value; // @[Mux.scala 101:16]
+  wire [63:0] _io_o_ex_res_packs_0_uop_T_11_dst_value = _bru_io_i_select_to_commit_T ?
+    bru_io_o_ex_res_pack_uop_dst_value : _io_o_ex_res_packs_0_uop_T_10_dst_value; // @[Mux.scala 101:16]
   wire [63:0] _io_o_ex_res_packs_0_uop_T_11_src1_value = _bru_io_i_select_to_commit_T ?
     bru_io_o_ex_res_pack_uop_src1_value : _io_o_ex_res_packs_0_uop_T_10_src1_value; // @[Mux.scala 101:16]
   wire [4:0] _io_o_ex_res_packs_0_uop_T_11_alu_sel = _bru_io_i_select_to_commit_T ? bru_io_o_ex_res_pack_uop_alu_sel :
@@ -631,8 +632,8 @@ module Execute(
      : _io_o_ex_res_packs_1_uop_T_10_arch_dst; // @[Mux.scala 101:16]
   wire [6:0] _io_o_ex_res_packs_1_uop_T_11_rob_idx = _bru_io_i_select_to_commit_T_1 ? bru_io_o_ex_res_pack_uop_rob_idx
      : _io_o_ex_res_packs_1_uop_T_10_rob_idx; // @[Mux.scala 101:16]
-  wire [63:0] _io_o_ex_res_packs_1_uop_T_11_dst_value = _bru_io_i_select_to_commit_T_1 ? 64'h0 :
-    _io_o_ex_res_packs_1_uop_T_10_dst_value; // @[Mux.scala 101:16]
+  wire [63:0] _io_o_ex_res_packs_1_uop_T_11_dst_value = _bru_io_i_select_to_commit_T_1 ?
+    bru_io_o_ex_res_pack_uop_dst_value : _io_o_ex_res_packs_1_uop_T_10_dst_value; // @[Mux.scala 101:16]
   wire [63:0] _io_o_ex_res_packs_1_uop_T_11_src1_value = _bru_io_i_select_to_commit_T_1 ?
     bru_io_o_ex_res_pack_uop_src1_value : _io_o_ex_res_packs_1_uop_T_10_src1_value; // @[Mux.scala 101:16]
   wire [4:0] _io_o_ex_res_packs_1_uop_T_11_alu_sel = _bru_io_i_select_to_commit_T_1 ? bru_io_o_ex_res_pack_uop_alu_sel
@@ -788,6 +789,7 @@ module Execute(
     .io_o_ex_res_pack_uop_stale_dst(bru_io_o_ex_res_pack_uop_stale_dst),
     .io_o_ex_res_pack_uop_arch_dst(bru_io_o_ex_res_pack_uop_arch_dst),
     .io_o_ex_res_pack_uop_rob_idx(bru_io_o_ex_res_pack_uop_rob_idx),
+    .io_o_ex_res_pack_uop_dst_value(bru_io_o_ex_res_pack_uop_dst_value),
     .io_o_ex_res_pack_uop_src1_value(bru_io_o_ex_res_pack_uop_src1_value),
     .io_o_ex_res_pack_uop_alu_sel(bru_io_o_ex_res_pack_uop_alu_sel),
     .io_o_available(bru_io_o_available),

@@ -20,8 +20,6 @@ module Queue(
   output [31:0] io_deq_bits_insts_1,
   output        io_deq_bits_branch_predict_pack_valid,
   output [63:0] io_deq_bits_branch_predict_pack_target,
-  output [3:0]  io_deq_bits_branch_predict_pack_branch_type,
-  output        io_deq_bits_branch_predict_pack_select,
   output        io_deq_bits_branch_predict_pack_taken
 );
 `ifdef RANDOMIZE_MEM_INIT
@@ -33,13 +31,11 @@ module Queue(
   reg [31:0] _RAND_5;
   reg [63:0] _RAND_6;
   reg [31:0] _RAND_7;
-  reg [31:0] _RAND_8;
-  reg [31:0] _RAND_9;
 `endif // RANDOMIZE_MEM_INIT
 `ifdef RANDOMIZE_REG_INIT
+  reg [31:0] _RAND_8;
+  reg [31:0] _RAND_9;
   reg [31:0] _RAND_10;
-  reg [31:0] _RAND_11;
-  reg [31:0] _RAND_12;
 `endif // RANDOMIZE_REG_INIT
   reg  ram_valids_0 [0:63]; // @[Decoupled.scala 275:95]
   wire  ram_valids_0_io_deq_bits_MPORT_en; // @[Decoupled.scala 275:95]
@@ -97,22 +93,6 @@ module Queue(
   wire [5:0] ram_branch_predict_pack_target_MPORT_addr; // @[Decoupled.scala 275:95]
   wire  ram_branch_predict_pack_target_MPORT_mask; // @[Decoupled.scala 275:95]
   wire  ram_branch_predict_pack_target_MPORT_en; // @[Decoupled.scala 275:95]
-  reg [3:0] ram_branch_predict_pack_branch_type [0:63]; // @[Decoupled.scala 275:95]
-  wire  ram_branch_predict_pack_branch_type_io_deq_bits_MPORT_en; // @[Decoupled.scala 275:95]
-  wire [5:0] ram_branch_predict_pack_branch_type_io_deq_bits_MPORT_addr; // @[Decoupled.scala 275:95]
-  wire [3:0] ram_branch_predict_pack_branch_type_io_deq_bits_MPORT_data; // @[Decoupled.scala 275:95]
-  wire [3:0] ram_branch_predict_pack_branch_type_MPORT_data; // @[Decoupled.scala 275:95]
-  wire [5:0] ram_branch_predict_pack_branch_type_MPORT_addr; // @[Decoupled.scala 275:95]
-  wire  ram_branch_predict_pack_branch_type_MPORT_mask; // @[Decoupled.scala 275:95]
-  wire  ram_branch_predict_pack_branch_type_MPORT_en; // @[Decoupled.scala 275:95]
-  reg  ram_branch_predict_pack_select [0:63]; // @[Decoupled.scala 275:95]
-  wire  ram_branch_predict_pack_select_io_deq_bits_MPORT_en; // @[Decoupled.scala 275:95]
-  wire [5:0] ram_branch_predict_pack_select_io_deq_bits_MPORT_addr; // @[Decoupled.scala 275:95]
-  wire  ram_branch_predict_pack_select_io_deq_bits_MPORT_data; // @[Decoupled.scala 275:95]
-  wire  ram_branch_predict_pack_select_MPORT_data; // @[Decoupled.scala 275:95]
-  wire [5:0] ram_branch_predict_pack_select_MPORT_addr; // @[Decoupled.scala 275:95]
-  wire  ram_branch_predict_pack_select_MPORT_mask; // @[Decoupled.scala 275:95]
-  wire  ram_branch_predict_pack_select_MPORT_en; // @[Decoupled.scala 275:95]
   reg  ram_branch_predict_pack_taken [0:63]; // @[Decoupled.scala 275:95]
   wire  ram_branch_predict_pack_taken_io_deq_bits_MPORT_en; // @[Decoupled.scala 275:95]
   wire [5:0] ram_branch_predict_pack_taken_io_deq_bits_MPORT_addr; // @[Decoupled.scala 275:95]
@@ -182,22 +162,6 @@ module Queue(
   assign ram_branch_predict_pack_target_MPORT_addr = enq_ptr_value;
   assign ram_branch_predict_pack_target_MPORT_mask = 1'h1;
   assign ram_branch_predict_pack_target_MPORT_en = io_enq_ready & io_enq_valid;
-  assign ram_branch_predict_pack_branch_type_io_deq_bits_MPORT_en = 1'h1;
-  assign ram_branch_predict_pack_branch_type_io_deq_bits_MPORT_addr = deq_ptr_value;
-  assign ram_branch_predict_pack_branch_type_io_deq_bits_MPORT_data =
-    ram_branch_predict_pack_branch_type[ram_branch_predict_pack_branch_type_io_deq_bits_MPORT_addr]; // @[Decoupled.scala 275:95]
-  assign ram_branch_predict_pack_branch_type_MPORT_data = 4'h0;
-  assign ram_branch_predict_pack_branch_type_MPORT_addr = enq_ptr_value;
-  assign ram_branch_predict_pack_branch_type_MPORT_mask = 1'h1;
-  assign ram_branch_predict_pack_branch_type_MPORT_en = io_enq_ready & io_enq_valid;
-  assign ram_branch_predict_pack_select_io_deq_bits_MPORT_en = 1'h1;
-  assign ram_branch_predict_pack_select_io_deq_bits_MPORT_addr = deq_ptr_value;
-  assign ram_branch_predict_pack_select_io_deq_bits_MPORT_data =
-    ram_branch_predict_pack_select[ram_branch_predict_pack_select_io_deq_bits_MPORT_addr]; // @[Decoupled.scala 275:95]
-  assign ram_branch_predict_pack_select_MPORT_data = 1'h0;
-  assign ram_branch_predict_pack_select_MPORT_addr = enq_ptr_value;
-  assign ram_branch_predict_pack_select_MPORT_mask = 1'h1;
-  assign ram_branch_predict_pack_select_MPORT_en = io_enq_ready & io_enq_valid;
   assign ram_branch_predict_pack_taken_io_deq_bits_MPORT_en = 1'h1;
   assign ram_branch_predict_pack_taken_io_deq_bits_MPORT_addr = deq_ptr_value;
   assign ram_branch_predict_pack_taken_io_deq_bits_MPORT_data =
@@ -215,8 +179,6 @@ module Queue(
   assign io_deq_bits_insts_1 = ram_insts_1_io_deq_bits_MPORT_data; // @[Decoupled.scala 312:17]
   assign io_deq_bits_branch_predict_pack_valid = ram_branch_predict_pack_valid_io_deq_bits_MPORT_data; // @[Decoupled.scala 312:17]
   assign io_deq_bits_branch_predict_pack_target = ram_branch_predict_pack_target_io_deq_bits_MPORT_data; // @[Decoupled.scala 312:17]
-  assign io_deq_bits_branch_predict_pack_branch_type = ram_branch_predict_pack_branch_type_io_deq_bits_MPORT_data; // @[Decoupled.scala 312:17]
-  assign io_deq_bits_branch_predict_pack_select = ram_branch_predict_pack_select_io_deq_bits_MPORT_data; // @[Decoupled.scala 312:17]
   assign io_deq_bits_branch_predict_pack_taken = ram_branch_predict_pack_taken_io_deq_bits_MPORT_data; // @[Decoupled.scala 312:17]
   always @(posedge clock) begin
     if (ram_valids_0_MPORT_en & ram_valids_0_MPORT_mask) begin
@@ -241,14 +203,6 @@ module Queue(
     if (ram_branch_predict_pack_target_MPORT_en & ram_branch_predict_pack_target_MPORT_mask) begin
       ram_branch_predict_pack_target[ram_branch_predict_pack_target_MPORT_addr] <=
         ram_branch_predict_pack_target_MPORT_data; // @[Decoupled.scala 275:95]
-    end
-    if (ram_branch_predict_pack_branch_type_MPORT_en & ram_branch_predict_pack_branch_type_MPORT_mask) begin
-      ram_branch_predict_pack_branch_type[ram_branch_predict_pack_branch_type_MPORT_addr] <=
-        ram_branch_predict_pack_branch_type_MPORT_data; // @[Decoupled.scala 275:95]
-    end
-    if (ram_branch_predict_pack_select_MPORT_en & ram_branch_predict_pack_select_MPORT_mask) begin
-      ram_branch_predict_pack_select[ram_branch_predict_pack_select_MPORT_addr] <=
-        ram_branch_predict_pack_select_MPORT_data; // @[Decoupled.scala 275:95]
     end
     if (ram_branch_predict_pack_taken_MPORT_en & ram_branch_predict_pack_taken_MPORT_mask) begin
       ram_branch_predict_pack_taken[ram_branch_predict_pack_taken_MPORT_addr] <=
@@ -329,21 +283,15 @@ initial begin
     ram_branch_predict_pack_target[initvar] = _RAND_6[63:0];
   _RAND_7 = {1{`RANDOM}};
   for (initvar = 0; initvar < 64; initvar = initvar+1)
-    ram_branch_predict_pack_branch_type[initvar] = _RAND_7[3:0];
-  _RAND_8 = {1{`RANDOM}};
-  for (initvar = 0; initvar < 64; initvar = initvar+1)
-    ram_branch_predict_pack_select[initvar] = _RAND_8[0:0];
-  _RAND_9 = {1{`RANDOM}};
-  for (initvar = 0; initvar < 64; initvar = initvar+1)
-    ram_branch_predict_pack_taken[initvar] = _RAND_9[0:0];
+    ram_branch_predict_pack_taken[initvar] = _RAND_7[0:0];
 `endif // RANDOMIZE_MEM_INIT
 `ifdef RANDOMIZE_REG_INIT
+  _RAND_8 = {1{`RANDOM}};
+  enq_ptr_value = _RAND_8[5:0];
+  _RAND_9 = {1{`RANDOM}};
+  deq_ptr_value = _RAND_9[5:0];
   _RAND_10 = {1{`RANDOM}};
-  enq_ptr_value = _RAND_10[5:0];
-  _RAND_11 = {1{`RANDOM}};
-  deq_ptr_value = _RAND_11[5:0];
-  _RAND_12 = {1{`RANDOM}};
-  maybe_full = _RAND_12[0:0];
+  maybe_full = _RAND_10[0:0];
 `endif // RANDOMIZE_REG_INIT
   `endif // RANDOMIZE
 end // initial

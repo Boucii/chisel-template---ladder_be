@@ -7,7 +7,7 @@ import chisel3.util._
 import chisel3.util.experimental.decode._
 import chisel3.experimental.BundleLiterals._
 
-class Ladder extends Module {
+class Ladder_2 extends Module {
   val io = IO(new Bundle {
     //icache io
     val icache_io = new IcacheIO()

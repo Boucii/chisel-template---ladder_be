@@ -188,6 +188,7 @@ class Reorder_Buffer extends Module with consts{
     when(next_rob_state === s_rollback){
       //when rollback, no allocation,no exe write, no commit
       allocate_ptr := allocate_ptr - this_num_to_roll_back
+      rob_valid(allocate_ptr) := false.B
     }
     when(next_rob_state === s_reset){
         for(i <- 0 until 64){

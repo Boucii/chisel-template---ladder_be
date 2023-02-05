@@ -31,7 +31,7 @@ class Back_End_With_Decode extends Module with consts{
 
         val i_interrupt = Input(Bool())
         //for debug and verilator usage
-        val o_dbg_commit_packs = Output(new commit_packs())
+        val o_dbg_commit_packs = Output(Vec(2,new valid_uop_pack()))
         val o_dbg_stop = Output(Bool())
         val o_dbg_arch_regs = Output(Vec(32,UInt(64.W)))
     }) 
@@ -159,7 +159,7 @@ class Back_End_With_Decode extends Module with consts{
     arch_regs_output := arch_regs.io.o_arch_regs
     dontTouch(arch_regs_output)
 
-    io.o_dbg_commit_packs = csr.io.o_commit_packs_modified
-    io.o_dbg_stop = csr.io.o_dbg_commit_packs_modified(0).valid && csr.io.o_commit_packs_modified(0).inst === "b00000000000100000000000001110011".U//aka ebreak
-    io.o_dbg_arch_regs = arch_regs_output
+    io.o_dbg_commit_packs := csr.io.o_commit_packs_modified
+    io.o_dbg_stop := csr.io.o_commit_packs_modified(0).valid && csr.io.o_commit_packs_modified(0).uop.inst === "b00000000000100000000000001110011".U//aka ebreak
+    io.o_dbg_arch_regs := arch_regs_output
 }

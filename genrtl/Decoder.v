@@ -86,6 +86,7 @@ module Decoder(
   reg  uops_1_branch_predict_pack_valid; // @[decoder.scala 46:23]
   reg [63:0] uops_1_branch_predict_pack_target; // @[decoder.scala 46:23]
   reg  uops_1_branch_predict_pack_taken; // @[decoder.scala 46:23]
+  wire  _T_3 = ~(io_i_branch_resolve_pack_valid & io_i_branch_resolve_pack_mispred); // @[decoder.scala 49:51]
   wire [64:0] _uops_0_pc_T_2 = {{1'd0}, io_i_fetch_pack_bits_pc}; // @[decoder.scala 52:43]
   wire [63:0] _uops_1_pc_T_3 = io_i_fetch_pack_bits_pc + 64'h4; // @[decoder.scala 52:43]
   wire  _GEN_0 = io_i_stall & _io_i_fetch_pack_ready_T_1 & uops_0_valid; // @[decoder.scala 56:46 58:16 62:22]
@@ -1539,7 +1540,8 @@ module Decoder(
   wire [63:0] _GEN_148 = reset ? 64'h0 : _GEN_63; // @[decoder.scala 46:{23,23}]
   wire [63:0] _GEN_149 = reset ? 64'h0 : _GEN_71; // @[decoder.scala 46:{23,23}]
   assign io_i_fetch_pack_ready = ~io_i_stall & ~io_i_exception; // @[decoder.scala 44:41]
-  assign io_o_decode_packs_0_valid = inst_valid_0_orMatrixOutputs & uops_0_valid; // @[decoder.scala 92:50]
+  assign io_o_decode_packs_0_valid = inst_valid_0_orMatrixOutputs & uops_0_valid & _io_i_fetch_pack_ready_T &
+    _io_i_fetch_pack_ready_T_1 & _T_3; // @[decoder.scala 92:104]
   assign io_o_decode_packs_0_pc = uops_0_pc; // @[decoder.scala 68:22]
   assign io_o_decode_packs_0_inst = uops_0_inst; // @[decoder.scala 68:22]
   assign io_o_decode_packs_0_func_code = {io_o_decode_packs_0_func_code_invMatrixOutputs_hi,
@@ -1571,7 +1573,8 @@ module Decoder(
   assign io_o_decode_packs_0_branch_type = io_o_decode_packs_0_branch_type_invMatrixOutputs[2:0]; // @[decoder.scala 76:18]
   assign io_o_decode_packs_0_mem_type = {io_o_decode_packs_0_mem_type_orMatrixOutputs[1],
     io_o_decode_packs_0_mem_type_orMatrixOutputs[0]}; // @[Cat.scala 33:92]
-  assign io_o_decode_packs_1_valid = inst_valid_1_orMatrixOutputs & uops_1_valid; // @[decoder.scala 92:50]
+  assign io_o_decode_packs_1_valid = inst_valid_1_orMatrixOutputs & uops_1_valid & _io_i_fetch_pack_ready_T &
+    _io_i_fetch_pack_ready_T_1 & _T_3; // @[decoder.scala 92:104]
   assign io_o_decode_packs_1_pc = uops_1_pc; // @[decoder.scala 68:22]
   assign io_o_decode_packs_1_inst = uops_1_inst; // @[decoder.scala 68:22]
   assign io_o_decode_packs_1_func_code = {io_o_decode_packs_1_func_code_invMatrixOutputs_hi,

@@ -26,12 +26,12 @@ class front_end_control extends Module
         val o_stage2_flush = Output(Bool())
         val o_stage3_flush = Output(Bool())
    })
-   val stage3_flush = RegInit(false.B)
-   val stage2_flush = RegInit(false.B)
-   val stage1_flush = RegInit(false.B)
-   val stage3_stall = RegInit(false.B)
-   val stage2_stall = RegInit(false.B)
-   val stage1_stall = RegInit(false.B)
+   val stage3_flush = Wire(Bool())//RegInit(false.B)
+   val stage2_flush = Wire(Bool())//RegInit(false.B)
+   val stage1_flush = Wire(Bool())//RegInit(false.B)
+   val stage3_stall = Wire(Bool())//RegInit(false.B)
+   val stage2_stall = Wire(Bool())//RegInit(false.B)
+   val stage1_stall = Wire(Bool())//RegInit(false.B)
 
    io.o_stage3_flush := stage3_flush
    io.o_stage2_flush := stage2_flush

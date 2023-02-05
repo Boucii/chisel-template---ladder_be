@@ -145,6 +145,8 @@ class BRU extends Function_Unit(
         next_uop.valid:=false.B
     }
     io.o_ex_res_pack.uop := uop
+    io.o_ex_res_pack.uop.dst_value := uop.pc + 4.U
+
     val rs1=uop.src1_value
     val rs2=uop.src2_value
 
@@ -441,8 +443,6 @@ class CSR_BF() extends Function_Unit(
     io.o_func_idx:=FU_CSR
     io.o_ex_res_pack.uop := uop
     io.o_ex_res_pack.valid := uop.valid
-
-
 
     next_state := MuxCase(state,Seq(
         (io.i_exception) -> s_FREE,

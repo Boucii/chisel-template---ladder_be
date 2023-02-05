@@ -23,8 +23,6 @@ module Front_End(
   output [31:0] io_o_fetch_pack_bits_insts_1,
   output        io_o_fetch_pack_bits_branch_predict_pack_valid,
   output [63:0] io_o_fetch_pack_bits_branch_predict_pack_target,
-  output [3:0]  io_o_fetch_pack_bits_branch_predict_pack_branch_type,
-  output        io_o_fetch_pack_bits_branch_predict_pack_select,
   output        io_o_fetch_pack_bits_branch_predict_pack_taken
 );
   wire  pc_gen_clock; // @[front_end.scala 26:24]
@@ -110,13 +108,9 @@ module Front_End(
   wire [31:0] fetch_queue_io_out_bits_insts_1; // @[front_end.scala 31:29]
   wire  fetch_queue_io_out_bits_branch_predict_pack_valid; // @[front_end.scala 31:29]
   wire [63:0] fetch_queue_io_out_bits_branch_predict_pack_target; // @[front_end.scala 31:29]
-  wire [3:0] fetch_queue_io_out_bits_branch_predict_pack_branch_type; // @[front_end.scala 31:29]
-  wire  fetch_queue_io_out_bits_branch_predict_pack_select; // @[front_end.scala 31:29]
   wire  fetch_queue_io_out_bits_branch_predict_pack_taken; // @[front_end.scala 31:29]
   wire  fetch_queue_io_full; // @[front_end.scala 31:29]
   wire  fetch_queue_io_i_flush; // @[front_end.scala 31:29]
-  wire  front_end_control_clock; // @[front_end.scala 32:35]
-  wire  front_end_control_reset; // @[front_end.scala 32:35]
   wire  front_end_control_io_i_pc_redirect_valid; // @[front_end.scala 32:35]
   wire  front_end_control_io_i_icache_data_valid; // @[front_end.scala 32:35]
   wire  front_end_control_io_i_icache_addr_ready; // @[front_end.scala 32:35]
@@ -242,15 +236,11 @@ module Front_End(
     .io_out_bits_insts_1(fetch_queue_io_out_bits_insts_1),
     .io_out_bits_branch_predict_pack_valid(fetch_queue_io_out_bits_branch_predict_pack_valid),
     .io_out_bits_branch_predict_pack_target(fetch_queue_io_out_bits_branch_predict_pack_target),
-    .io_out_bits_branch_predict_pack_branch_type(fetch_queue_io_out_bits_branch_predict_pack_branch_type),
-    .io_out_bits_branch_predict_pack_select(fetch_queue_io_out_bits_branch_predict_pack_select),
     .io_out_bits_branch_predict_pack_taken(fetch_queue_io_out_bits_branch_predict_pack_taken),
     .io_full(fetch_queue_io_full),
     .io_i_flush(fetch_queue_io_i_flush)
   );
   front_end_control front_end_control ( // @[front_end.scala 32:35]
-    .clock(front_end_control_clock),
-    .reset(front_end_control_reset),
     .io_i_pc_redirect_valid(front_end_control_io_i_pc_redirect_valid),
     .io_i_icache_data_valid(front_end_control_io_i_icache_data_valid),
     .io_i_icache_addr_ready(front_end_control_io_i_icache_addr_ready),
@@ -295,8 +285,6 @@ module Front_End(
   assign io_o_fetch_pack_bits_insts_1 = fetch_queue_io_out_bits_insts_1; // @[front_end.scala 90:21]
   assign io_o_fetch_pack_bits_branch_predict_pack_valid = fetch_queue_io_out_bits_branch_predict_pack_valid; // @[front_end.scala 90:21]
   assign io_o_fetch_pack_bits_branch_predict_pack_target = fetch_queue_io_out_bits_branch_predict_pack_target; // @[front_end.scala 90:21]
-  assign io_o_fetch_pack_bits_branch_predict_pack_branch_type = fetch_queue_io_out_bits_branch_predict_pack_branch_type; // @[front_end.scala 90:21]
-  assign io_o_fetch_pack_bits_branch_predict_pack_select = fetch_queue_io_out_bits_branch_predict_pack_select; // @[front_end.scala 90:21]
   assign io_o_fetch_pack_bits_branch_predict_pack_taken = fetch_queue_io_out_bits_branch_predict_pack_taken; // @[front_end.scala 90:21]
   assign pc_gen_clock = clock;
   assign pc_gen_reset = reset;
@@ -359,8 +347,6 @@ module Front_End(
   assign fetch_queue_io_in_bits_branch_predict_pack_taken = fetch_res_io_o_fetch_pack_bits_branch_predict_pack_taken; // @[front_end.scala 86:24]
   assign fetch_queue_io_out_ready = io_o_fetch_pack_ready; // @[front_end.scala 90:21]
   assign fetch_queue_io_i_flush = front_end_control_io_o_stage3_flush; // @[front_end.scala 87:28]
-  assign front_end_control_clock = clock;
-  assign front_end_control_reset = reset;
   assign front_end_control_io_i_pc_redirect_valid = io_i_pc_redirect_valid; // @[front_end.scala 36:46]
   assign front_end_control_io_i_icache_data_valid = io_icache_io_i_data_valid; // @[front_end.scala 38:46]
   assign front_end_control_io_i_icache_addr_ready = io_icache_io_i_addr_ready; // @[front_end.scala 37:46]
