@@ -81,12 +81,12 @@ object decode_table extends consts{
     BLTU   -> List(Y,    BitPat(FU_BRU),       N,        BitPat(B_TYPE),   BitPat(SRC_RS),     BitPat(SRC_RS),   BitPat(ALU_NONE),    BitPat(BR_LTU),           BitPat(MEM_N)), 
     BGEU   -> List(Y,    BitPat(FU_BRU),       N,        BitPat(B_TYPE),   BitPat(SRC_RS),     BitPat(SRC_RS),   BitPat(ALU_NONE),    BitPat(BR_GEU),           BitPat(MEM_N)), 
 
-    EBREAK -> List(Y,    BitPat(FU_CSR),       N,        BitPat(I_TYPE),   BitPat(SRC_N),      BitPat(SRC_N),   BitPat(CSR_EBREAK),  BitPat(BR_N),             BitPat(MEM_N)), 
-    MRET   -> List(Y,    BitPat(FU_CSR),       N,        BitPat(R_TYPE),   BitPat(SRC_N),     BitPat(SRC_N),   BitPat(CSR_MRET),    BitPat(BR_N),             BitPat(MEM_N)), 
-    ECALL  -> List(Y,    BitPat(FU_CSR),       N,        BitPat(I_TYPE),   BitPat(SRC_N),     BitPat(SRC_N),   BitPat(CSR_ECALL),   BitPat(BR_N),             BitPat(MEM_N)), 
-    CSRRC  -> List(Y,    BitPat(FU_CSR),       Y,        BitPat(I_TYPE),   BitPat(SRC_RS),     BitPat(SRC_IMM),   BitPat(CSR_CSRRC),   BitPat(BR_N),             BitPat(MEM_N)), 
-    CSRRW  -> List(Y,    BitPat(FU_CSR),       Y,        BitPat(I_TYPE),   BitPat(SRC_RS),     BitPat(SRC_IMM),   BitPat(CSR_CSRRW),   BitPat(BR_N),             BitPat(MEM_N)), 
-    CSRRS  -> List(Y,    BitPat(FU_CSR),       Y,        BitPat(I_TYPE),   BitPat(SRC_RS),     BitPat(SRC_IMM),   BitPat(CSR_CSRRS),   BitPat(BR_N),             BitPat(MEM_N)) 
+    EBREAK -> List(Y,    BitPat(FU_CSR),       N,        BitPat(I_TYPE),   BitPat(SRC_N),      BitPat(SRC_N),    BitPat(CSR_EBREAK),  BitPat(BR_N),             BitPat(MEM_N)), 
+    MRET   -> List(Y,    BitPat(FU_CSR),       N,        BitPat(R_TYPE),   BitPat(SRC_N),      BitPat(SRC_N),    BitPat(CSR_MRET),    BitPat(BR_N),             BitPat(MEM_N)), 
+    ECALL  -> List(Y,    BitPat(FU_CSR),       N,        BitPat(I_TYPE),   BitPat(SRC_N),      BitPat(SRC_N),    BitPat(CSR_ECALL),   BitPat(BR_N),             BitPat(MEM_N)), 
+    CSRRC  -> List(Y,    BitPat(FU_CSR),       Y,        BitPat(I_TYPE),   BitPat(SRC_RS),     BitPat(SRC_IMM),  BitPat(CSR_CSRRC),   BitPat(BR_N),             BitPat(MEM_N)), 
+    CSRRW  -> List(Y,    BitPat(FU_CSR),       Y,        BitPat(I_TYPE),   BitPat(SRC_RS),     BitPat(SRC_IMM),  BitPat(CSR_CSRRW),   BitPat(BR_N),             BitPat(MEM_N)), 
+    CSRRS  -> List(Y,    BitPat(FU_CSR),       Y,        BitPat(I_TYPE),   BitPat(SRC_RS),     BitPat(SRC_IMM),  BitPat(CSR_CSRRS),   BitPat(BR_N),             BitPat(MEM_N)) 
 //  CSRRW  -> List(Y,    BitPat(FU_MEM),       Y,        BitPat(I,    )    BitPat(SRC_RS),     BitPat(SRC_IMM),  BitPat(ALU_NONE),    BitPat(BR_N),             BitPat(MEM_N)), 
 //  CSRRS  -> List(Y,    BitPat(FU_MEM),       Y,        BitPat(I,    )    BitPat(SRC_RS),     BitPat(SRC_IMM),  BitPat(ALU_NONE),    BitPat(BR_N),             BitPat(MEM_N)), 
 //  CSRRC  -> List(Y,    BitPat(FU_MEM),       Y,        BitPat(I,    )    BitPat(SRC_RS),     BitPat(SRC_IMM),  BitPat(ALU_NONE),    BitPat(BR_N),             BitPat(MEM_N)), 

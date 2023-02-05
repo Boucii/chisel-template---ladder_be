@@ -24,8 +24,6 @@ class Reservation_Station extends Module with consts{
      val o_full = Output(Bool())//
      val i_exception = Input(Bool())
      val i_available_funcs = Input(Vec(7, UInt(2.W)))
-
-
    }) 
      //val uops = Reg(Vec(2,new uop()))
      val uops = RegInit(0.U.asTypeOf(Vec(2,new uop())))
@@ -135,7 +133,7 @@ class Reservation_Station extends Module with consts{
      issued_age_pack.issued_ages(1) := MuxCase(63.U,(for(i <- 0 to 63)yield(i.U===issue2_idx)->reservation_station(i).io.o_age))
      when(io.i_exception){
         issued_age_pack := 0.U.asTypeOf(new age_pack())
-     }
+     }     
 
      io.o_full := issued_age_pack.max_age>60.U
 
@@ -155,7 +153,6 @@ class Reservation_Station extends Module with consts{
         (i.U===write_idx1) -> uops(0).valid,
         (i.U===write_idx2) -> uops(1).valid
       )
-
      )//Mux((i.U===write_idx1||i.U===write_idx2)&&(!io.o_full),true.B,false.B)//and we have things to write_idx1,改一改这个的逻辑,尽量让他和uopvalid解耦
      //通过加一点num_write之类的
      reservation_station(i).io.i_uop := Mux(i.U===write_idx1,uops(0),uops(1))//rewrite this with mux??

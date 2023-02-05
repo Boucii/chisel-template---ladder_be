@@ -41,7 +41,7 @@ class Decoder extends Module with consts{
     )
     val default_table = List(N,BitPat.dontCare(7),N,BitPat.dontCare(7),BitPat.dontCare(3),BitPat.dontCare(3),BitPat.dontCare(5),BitPat.dontCare(4),BitPat.dontCare(2))
 
-    io.i_fetch_pack.ready:=(!io.i_stall) && (!(io.i_branch_resolve_pack.valid && io.i_branch_resolve_pack.mispred)) && (!io.i_exception)
+    io.i_fetch_pack.ready:= !io.i_stall && !io.i_exception && (!(io.i_branch_resolve_pack.valid && io.i_branch_resolve_pack.mispred)) 
     val table = decode_table.table 
     val uops = RegInit(0.U.asTypeOf(Vec(2,new uop())))//aka uop
     val insts = Wire(Vec(2,UInt(64.W)))
@@ -89,6 +89,7 @@ class Decoder extends Module with consts{
 
    for(i <- 0 until 2){
      //io.o_decode_packs(i).valid := io.i_fetch_pack.valid && inst_valid(i)//to be modified//wrong!
+     //io.o_decode_packs(i).valid := inst_valid(i) && uops(i).valid
      io.o_decode_packs(i).valid := inst_valid(i) && uops(i).valid &&(!io.i_stall) && (!io.i_exception) && (!(io.i_branch_resolve_pack.valid && io.i_branch_resolve_pack.mispred))
      io.o_decode_packs(i).imm := MuxCase(0.U,Seq(
          (io.o_decode_packs(i).inst_type === I_TYPE)->immI(i),

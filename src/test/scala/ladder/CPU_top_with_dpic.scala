@@ -7,20 +7,26 @@ import chisel3.util._
 import chisel3.util.experimental.decode._
 import chisel3.experimental.BundleLiterals._
 
-class Ladder_2 extends Module {
+class Ladder extends Module {
   val io = IO(new Bundle {
     //icache io
     val icache_io = new IcacheIO()
     //dcache io
     val dcache_io = new DcacheIO()
     val i_interrupt = Input(Bool())
+    //cmt_dbg
+    val o_dbg_commit_packs = Output(Vec(2,new valid_uop_pack()))
   })
   val front_end = Module(new Front_End())
   val back_end = Module(new Back_End_With_Decode())
   val dpic = Module(new dpic())
 
   //connect front end input
-  front_end.io.i_branch_resolve_pack := back_end.io.o_branch_resolve_pack
+  val last_branch_resolve_pack = RegInit(0.U.asTypeOf(new branch_resolve_pack()))
+  last_branch_resolve_pack := back_end.io.o_branch_resolve_pack
+  //when backend branch resolve flush, the front end just have to flush one cycle
+  front_end.io.i_branch_resolve_pack := Mux(last_branch_resolve_pack.asUInt === back_end.io.o_branch_resolve_pack.asUInt, 
+       0.U.asTypeOf(new branch_resolve_pack()), back_end.io.o_branch_resolve_pack)
   front_end.io.i_pc_redirect_valid := back_end.io.o_pc_redirect_valid
   front_end.io.i_pc_redirect_target := back_end.io.o_pc_redirect_target
 
@@ -46,6 +52,8 @@ class Ladder_2 extends Module {
   io.dcache_io.Men                :=back_end.io.dcache_io.Men    
   io.dcache_io.Mlen               :=back_end.io.dcache_io.Mlen   
   io.dcache_io.MdataOut           :=back_end.io.dcache_io.MdataOut
+
+  io.o_dbg_commit_packs := back_end.io.o_dbg_commit_packs
 
   //connect dpi-c ports
   dpic.io.stop := back_end.io.o_dbg_stop
