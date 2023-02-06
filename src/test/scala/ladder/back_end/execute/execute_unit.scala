@@ -46,9 +46,13 @@ class ALU() extends Function_Unit(
     val uop = RegInit(0.U.asTypeOf(new uop()))//null uop
     val next_uop = Wire(new uop())
     next_uop := Mux(io.i_select,io.i_uop,uop)
-    when((io.i_select_to_commit && !io.i_select)||io.i_exception){
+
+    when((io.i_select_to_commit && !io.i_select)||io.i_exception ||
+        (io.i_rollback_valid && ((io.i_rollback_rob_idx < uop.rob_idx)||
+            (io.i_rollback_rob_idx > uop.rob_idx && (io.i_rollback_rob_idx(6) ^ uop.rob_idx(6)))))){
         next_uop.valid:=false.B
     }
+
     uop:=next_uop
 
     assert(uop.func_code ===FU_ALU || uop.func_code===0.U,"funccode is not alu")
@@ -108,15 +112,12 @@ class ALU() extends Function_Unit(
         (uop.alu_sel === ALU_SRAW   ) -> (opr1.asSInt>>opr2(4,0)).asUInt    
     )
     )
-
-
-
     next_state := MuxCase(state,Seq(
         (io.i_exception) -> s_FREE,
-        (io.i_rollback_valid && ((io.i_rollback_rob_idx > uop.rob_idx)||
-            (io.i_rollback_rob_idx < uop.rob_idx && io.i_rollback_rob_idx(6)===1.U && uop.rob_idx(6) === 0.U))) -> s_FREE,//TODO:rob被套圈怎么判断
+        (io.i_rollback_valid && ((io.i_rollback_rob_idx < uop.rob_idx)||
+            (io.i_rollback_rob_idx > uop.rob_idx && (io.i_rollback_rob_idx(6) ^ uop.rob_idx(6))))) -> s_FREE,//TODO:rob被套圈怎么判断
         (!(io.i_exception) && (state === s_FREE) && (uop.valid && !io.i_select_to_commit)) -> s_BUSY,
-        (!(io.i_exception) && (state === s_BUSY) && (io.i_select_to_commit)) -> s_FREE
+        (!(io.i_exception) && (state === s_BUSY) && (io.i_select_to_commit) && (!io.i_select)) -> s_FREE
     ))
 
     io.o_available := Mux(state === s_BUSY, false.B,true.B)
@@ -141,9 +142,11 @@ class BRU extends Function_Unit(
     val next_uop = Wire(new uop())
     next_uop := Mux(io.i_select,io.i_uop,uop)
     uop:=next_uop
+
     when((io.i_select_to_commit && !io.i_select)||io.i_exception){
         next_uop.valid:=false.B
     }
+
     io.o_ex_res_pack.uop := uop
     io.o_ex_res_pack.uop.dst_value := uop.pc + 4.U
 
@@ -295,8 +298,9 @@ class LSU extends Function_Unit(
 
     next_rollback_occured := MuxCase(rollback_occured,Seq(
         (next_state === s_FREE) -> false.B,
-        ((io.i_rollback_valid && ((io.i_rollback_rob_idx > uop.rob_idx)||
-            (io.i_rollback_rob_idx < uop.rob_idx && io.i_rollback_rob_idx(6)===1.U && uop.rob_idx(6) === 0.U)))) -> true.B
+        (io.i_rollback_valid && ((io.i_rollback_rob_idx < uop.rob_idx)||
+            (io.i_rollback_rob_idx > uop.rob_idx && (io.i_rollback_rob_idx(6) ^ uop.rob_idx(6))))) -> true.B,//TODO:rob被套圈怎么判断
+
     ))
 
     next_state := MuxCase(state,Seq(
@@ -324,10 +328,11 @@ class MUL extends Function_Unit(){
     val state = RegInit(s_FREE)
     val next_state = Wire(UInt(2.W))
     state := next_state
+
     next_state := MuxCase(state,Seq(
         (io.i_exception) -> s_FREE,
-        (io.i_rollback_valid && ((io.i_rollback_rob_idx > uop.rob_idx)||
-            (io.i_rollback_rob_idx < uop.rob_idx && io.i_rollback_rob_idx(6)===1.U && uop.rob_idx(6) === 0.U))) -> s_FREE,//TODO:rob被套圈怎么判断
+        (io.i_rollback_valid && ((io.i_rollback_rob_idx < uop.rob_idx)||
+            (io.i_rollback_rob_idx > uop.rob_idx && (io.i_rollback_rob_idx(6) ^ uop.rob_idx(6))))) -> s_FREE,//TODO:rob被套圈怎么判断
         (!(io.i_exception) && (state === s_FREE) && (io.i_select)) -> s_BUSY,
         (!(io.i_exception) && (state === s_BUSY) && (io.i_select_to_commit)) -> s_FREE
     ))
@@ -335,7 +340,7 @@ class MUL extends Function_Unit(){
     val next_uop = Wire(new uop())
     next_uop := Mux(io.i_select,io.i_uop,uop)
     uop:=next_uop
-    when((io.i_select_to_commit && !io.i_select)||io.i_exception){
+    when(next_state === s_FREE){
         next_uop.valid:=false.B
     }
     val multiplier = Module(new Multiplier())
@@ -382,10 +387,11 @@ class DIV extends Function_Unit(){
     val state = RegInit(s_FREE)
     val next_state = Wire(UInt(2.W))
     state := next_state
+
     next_state := MuxCase(state,Seq(
         (io.i_exception) -> s_FREE,
-        (io.i_rollback_valid && ((io.i_rollback_rob_idx > uop.rob_idx)||
-            (io.i_rollback_rob_idx < uop.rob_idx && io.i_rollback_rob_idx(6)===1.U && uop.rob_idx(6) === 0.U))) -> s_FREE,//TODO:rob被套圈怎么判断
+        (io.i_rollback_valid && ((io.i_rollback_rob_idx < uop.rob_idx)||
+            (io.i_rollback_rob_idx > uop.rob_idx && (io.i_rollback_rob_idx(6) ^ uop.rob_idx(6))))) -> s_FREE,//TODO:rob被套圈怎么判断
         (!(io.i_exception) && (state === s_FREE) && (io.i_select)) -> s_BUSY,
         (!(io.i_exception) && (state === s_BUSY) && (io.i_select_to_commit)) -> s_FREE
     ))
@@ -393,7 +399,7 @@ class DIV extends Function_Unit(){
     val next_uop = Wire(new uop())
     next_uop := Mux(io.i_select,io.i_uop,uop)
     uop:=next_uop
-    when((io.i_select_to_commit && !io.i_select)||io.i_exception){
+    when(next_state === s_FREE){
         next_uop.valid:=false.B
     }
 
@@ -435,7 +441,10 @@ class CSR_BF() extends Function_Unit(
     val uop = RegInit(0.U.asTypeOf(new uop()))//null uop
     val next_uop = Wire(new uop())
     next_uop := Mux(io.i_select,io.i_uop,uop)
-    when((io.i_select_to_commit && !io.i_select)||io.i_exception){
+
+    when((io.i_select_to_commit && !io.i_select)||io.i_exception ||
+        (io.i_rollback_valid && ((io.i_rollback_rob_idx < uop.rob_idx)||
+            (io.i_rollback_rob_idx > uop.rob_idx && (io.i_rollback_rob_idx(6) ^ uop.rob_idx(6)))))){
         next_uop.valid:=false.B
     }
     uop:=next_uop
@@ -444,14 +453,12 @@ class CSR_BF() extends Function_Unit(
     io.o_ex_res_pack.uop := uop
     io.o_ex_res_pack.valid := uop.valid
 
-
-
     next_state := MuxCase(state,Seq(
         (io.i_exception) -> s_FREE,
-        (io.i_rollback_valid && ((io.i_rollback_rob_idx > uop.rob_idx)||
-            (io.i_rollback_rob_idx < uop.rob_idx && io.i_rollback_rob_idx(6)===1.U && uop.rob_idx(6) === 0.U))) -> s_FREE,//TODO:rob被套圈怎么判断
+        (io.i_rollback_valid && ((io.i_rollback_rob_idx < uop.rob_idx)||
+            (io.i_rollback_rob_idx > uop.rob_idx && (io.i_rollback_rob_idx(6) ^ uop.rob_idx(6))))) -> s_FREE,//TODO:rob被套圈怎么判断
         (!(io.i_exception) && (state === s_FREE) && (uop.valid && !io.i_select_to_commit)) -> s_BUSY,
-        (!(io.i_exception) && (state === s_BUSY) && (io.i_select_to_commit)) -> s_FREE
+        (!(io.i_exception) && (state === s_BUSY) && (io.i_select_to_commit) && (!io.i_select)) -> s_FREE
     ))
 
     io.o_available := Mux(state === s_BUSY, false.B,true.B)

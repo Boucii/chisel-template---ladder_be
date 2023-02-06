@@ -188,7 +188,13 @@ class Reorder_Buffer extends Module with consts{
     when(next_rob_state === s_rollback){
       //when rollback, no allocation,no exe write, no commit
       allocate_ptr := allocate_ptr - this_num_to_roll_back
-      rob_valid(allocate_ptr) := false.B
+      when(this_num_to_roll_back === 2.U){
+        rob_valid(allocate_ptr-1.U) := false.B
+        rob_valid(allocate_ptr-2.U) := false.B
+      }
+      when(this_num_to_roll_back === 1.U){
+        rob_valid(allocate_ptr-1.U) := false.B
+      }
     }
     when(next_rob_state === s_reset){
         for(i <- 0 until 64){
@@ -214,7 +220,7 @@ class Reorder_Buffer extends Module with consts{
     next_rob_state:=Mux(io.o_exception || io.i_interrupt || last_pc_redirect , s_reset ,MuxCase(rob_state,Seq(
       (rob_state === s_reset) -> s_normal,
       (rob_state === s_normal && is_full) -> s_full,
-      ((rob_state ===s_normal) && (io.i_branch_resolve_pack.mispred && io.i_branch_resolve_pack.valid)) -> s_rollback,
+      ((rob_state ===s_normal) && (io.i_branch_resolve_pack.mispred && io.i_branch_resolve_pack.valid)&&((allocate_ptr -1.U) =/= io.i_branch_resolve_pack.rob_idx)) -> s_rollback,
       (rob_state === s_rollback && ((io.i_branch_resolve_pack.rob_idx === allocate_ptr-1.U) ||
                    (io.i_branch_resolve_pack.rob_idx === allocate_ptr-2.U) )) -> s_normal,
       (rob_state === s_full && will_commit(0)) -> s_normal

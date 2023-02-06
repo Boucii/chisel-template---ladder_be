@@ -53,8 +53,8 @@ class Reservation_Station_Slot extends Module with consts{
 
     val flush = Wire(Bool())
     flush := io.i_exception ||
-            valid && (io.i_branch_resolve_pack.valid && io.i_branch_resolve_pack.mispred &&((io.i_branch_resolve_pack.rob_idx > uop.rob_idx)||
-            (io.i_branch_resolve_pack.rob_idx < uop.rob_idx && io.i_branch_resolve_pack.rob_idx(6)===1.U && uop.rob_idx(6) === 0.U))) 
+            (valid && (io.i_branch_resolve_pack.valid && io.i_branch_resolve_pack.mispred &&((io.i_branch_resolve_pack.rob_idx < uop.rob_idx)||
+            (io.i_branch_resolve_pack.rob_idx > uop.rob_idx && (io.i_branch_resolve_pack.rob_idx(6) ^ uop.rob_idx(6)))))) 
 
     when(flush ){//or mux? when-wlse should be cascaded,so mux is better TODO:make this mux!!!!
         age := 63.U
