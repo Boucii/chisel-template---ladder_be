@@ -56,6 +56,7 @@ class Ladder extends Module {
   io.o_dbg_commit_packs := back_end.io.o_dbg_commit_packs
 
   //connect dpi-c ports
+  dpic.io.clk := clock
   dpic.io.stop := back_end.io.o_dbg_stop
   dpic.io.data_ready := back_end.io.dcache_io.data_ready
   dpic.io.addr_valid := back_end.io.dcache_io.addr_valid

@@ -30,13 +30,17 @@ class Dispatch extends Module{
 
     val uops=RegInit(0.U.asTypeOf(Vec(2, new uop())))
     uops:=Mux(stall,uops,io.i_rename_packs)//this seems not really necessary, since stall also works for formal stage
-    when(io.i_exception){
+    //this logic should be changed when decode doesn't block front end input when rbk. 
+    when(io.i_exception || (io.i_branch_resolve_pack.valid && io.i_branch_resolve_pack.mispred)){
         uops(0).valid:=false.B
         uops(1).valid:=false.B
     }
-    //we dont have to check if theres a branch mispred,cause when that happens, rob wont allocate for insts, but we add it anyway(latancy increse)
-    io.o_rob_allocation_reqs(0).valid:=Mux(io.i_reservation_station_full || (io.i_branch_resolve_pack.valid && io.i_branch_resolve_pack.mispred) ,false.B,uops(0).valid)
-    io.o_rob_allocation_reqs(1).valid:=Mux(io.i_reservation_station_full || (io.i_branch_resolve_pack.valid && io.i_branch_resolve_pack.mispred) ,false.B,uops(1).valid)
+    //we dont have to check if theres a branch mispred,cause when that happens, rob wont allocate for insts
+    //and we MUST not mask the allocation req when mispred, the logic is explained in rob the file, the rollback log part.
+    //this also implies that the insts in dispatch are always flushed when rbk. since all insts before a certain br must be already at or after rs. 
+    //aka. insts are inorder in brfore rs.
+    io.o_rob_allocation_reqs(0).valid:=Mux(io.i_reservation_station_full  ,false.B,uops(0).valid)
+    io.o_rob_allocation_reqs(1).valid:=Mux(io.i_reservation_station_full  ,false.B,uops(1).valid)
 
     io.o_rob_allocation_reqs(0).uop := uops(0) 
     io.o_rob_allocation_reqs(1).uop := uops(1) 

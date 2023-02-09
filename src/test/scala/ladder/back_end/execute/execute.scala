@@ -26,7 +26,7 @@ class Execute extends Module with consts{
 
         //to rob
         val o_ex_res_packs = Output(Vec(2, new valid_uop_pack()))//rename result to res 
-        val i_ROB_first_entry = Input(UInt(8.W))
+        val i_ROB_first_entry = Input(UInt(7.W))
         val dcache_io = (new DcacheIO())
 
         val o_branch_resolve_pack=Output(new branch_resolve_pack())
@@ -51,6 +51,14 @@ class Execute extends Module with consts{
     val mul = Module(new MUL())
     val div = Module(new DIV())
     val csr_bf = Module(new CSR_BF())
+
+    //because bru is pipelined, only when the second cycle after the resolve can ex know if theres rbk.(unless input next_rob_state)
+    //we must know this cyc if this is a new mispred. And when mispred, the ex must be stalled 1 cycle before rbk info comes in next cyc
+    //to take the control of deciding wether to stall
+    val last_branch_resolve_pack = RegInit(0.U.asTypeOf(new branch_resolve_pack()))
+    last_branch_resolve_pack := io.o_branch_resolve_pack
+    val new_br_resolve = Wire(Bool())
+    new_br_resolve := last_branch_resolve_pack.asUInt =/= io.o_branch_resolve_pack.asUInt 
 
     func_units += alu1
     func_units += alu2
@@ -176,14 +184,14 @@ class Execute extends Module with consts{
             div.io.o_ex_res_pack.valid,csr_bf.io.o_ex_res_pack.valid).reverse)
 
     for(i <- 0 until func_units.length){// use switch case to connect specialized function unit
-        func_units(i).io.i_select_to_commit:= (i.U ===issue_idx1 || i.U === issue_idx2) && func_units(i).io.o_ex_res_pack.valid && (!io.i_rollback_valid)
+        func_units(i).io.i_select_to_commit:= (i.U ===issue_idx1 || i.U === issue_idx2) && func_units(i).io.o_ex_res_pack.valid && (!io.i_rollback_valid) && (!new_br_resolve)
     }
 
     io.o_ex_res_packs(0).uop := MuxCase(func_units(0).io.o_ex_res_pack.uop,for(i <- 0 until func_units.length)yield((i.U===issue_idx1) ->func_units(i).io.o_ex_res_pack.uop ))
     io.o_ex_res_packs(1).uop := MuxCase(func_units(0).io.o_ex_res_pack.uop,for(i <- 0 until func_units.length)yield((i.U===issue_idx2) ->func_units(i).io.o_ex_res_pack.uop ))
 
-    io.o_ex_res_packs(0).valid :=Mux(io.i_exception || io.i_rollback_valid, false.B, MuxCase(false.B,for(i <- 0 until func_units.length)yield((i.U===issue_idx1) ->func_units(i).io.o_ex_res_pack.valid )))
-    io.o_ex_res_packs(1).valid :=Mux(io.i_exception || io.i_rollback_valid, false.B, MuxCase(false.B,for(i <- 0 until func_units.length)yield((i.U===issue_idx2) ->func_units(i).io.o_ex_res_pack.valid )) && (issue_idx1=/=issue_idx2))
+    io.o_ex_res_packs(0).valid :=Mux(io.i_exception || io.i_rollback_valid || new_br_resolve, false.B, MuxCase(false.B,for(i <- 0 until func_units.length)yield((i.U===issue_idx1) ->func_units(i).io.o_ex_res_pack.valid )))
+    io.o_ex_res_packs(1).valid :=Mux(io.i_exception || io.i_rollback_valid || new_br_resolve, false.B, MuxCase(false.B,for(i <- 0 until func_units.length)yield((i.U===issue_idx2) ->func_units(i).io.o_ex_res_pack.valid )) && (issue_idx1=/=issue_idx2))
 
     io.o_lsu_uop_valid := lsu.io.o_lsu_uop_valid
     io.o_lsu_uop_rob_idx := lsu.io.o_lsu_uop_rob_idx

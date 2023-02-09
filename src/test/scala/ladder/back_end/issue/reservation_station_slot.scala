@@ -41,6 +41,8 @@ class Reservation_Station_Slot extends Module with consts{
         val o_age = Output(UInt(8.W))
 
         val cond = Output(Bool())
+
+        val i_ROB_first_entry = Input(UInt(7.W))
     })
     val age = RegInit(63.U(6.W))
     io.o_age := age
@@ -166,7 +168,10 @@ class Reservation_Station_Slot extends Module with consts{
     io.cond:=(flush ||(io.i_issue_granted && !io.i_write_slot))
 
     //request logic
-    when( (valid===true.B) && (next_src1_ready===true.B) && (next_src2_ready===true.B) ){//do we need to consider valid? 
+    val ls_is_the_head_of_ROB = Wire(Bool())
+    ls_is_the_head_of_ROB := (io.i_ROB_first_entry === uop.rob_idx && uop.func_code === FU_MEM)|| (uop.func_code=/=FU_MEM)
+
+    when( (valid===true.B) && (next_src1_ready===true.B) && (next_src2_ready===true.B) && (!flush) && ls_is_the_head_of_ROB){//do we need to consider valid? 
         io.o_ready_to_issue := true.B
     }.otherwise{
         io.o_ready_to_issue := false.B

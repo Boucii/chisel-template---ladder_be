@@ -73,6 +73,7 @@ class Rename extends Module{
     busy_table.io.i_allocated_uops := io.o_rename_packs
     busy_table.io.i_commit_packs := io.i_commit_packs
     busy_table.io.i_rollback_packs := io.i_rollback_packs
+    //it is implied that for any inst that does not write a reg, the arch_dst field in uop in already set to 0 in the decode stage.
     busy_table.io.i_free_list_reqs(0):= uops(0).valid && (uops(0).arch_dst =/= 0.U)
     busy_table.io.i_free_list_reqs(1):= uops(1).valid && (uops(1).arch_dst =/= 0.U)
     busy_table.io.i_exception := io.i_exception
